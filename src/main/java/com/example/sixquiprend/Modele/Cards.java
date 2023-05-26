@@ -1,4 +1,4 @@
-package Modele;
+package com.example.sixquiprend.Modele;
 
 public class Cards {
     private int value;

@@ -1,4 +1,4 @@
-package Modele;
+package com.example.sixquiprend.Modele;
 import java.util.List;
 import java.util.ArrayList;
 

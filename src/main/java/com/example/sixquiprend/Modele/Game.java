@@ -1,6 +1,4 @@
-package Modele;
-import java.util.List;
-import java.util.ArrayList;
+package com.example.sixquiprend.Modele;
 
 public class Game {
     private Player winner;
