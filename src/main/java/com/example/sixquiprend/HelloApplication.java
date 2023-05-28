@@ -1,5 +1,6 @@
 package com.example.sixquiprend;
 
+import com.example.sixquiprend.Vue.Interface.Window;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -18,6 +19,6 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
-        launch();
+        new Window();
     }
 }
