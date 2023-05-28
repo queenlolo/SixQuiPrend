@@ -1,0 +1,18 @@
+Index: src/main/java/com/example/sixquiprend/Vue/Interface/Window.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.sixquiprend.Vue.Interface;\n\nimport javax.swing.*;\nimport java.awt.*;\nimport java.awt.event.ActionEvent;\nimport java.awt.event.ActionListener;\n\npublic class Window extends JFrame implements ActionListener {\n\n    private JButton btnPlay = new JButton(\"Play\");\n\n    public Window() {\n        super(\"6 Qui Prend\");\n        this.setDefaultCloseOperation(3);\n\n        JPanel contentPane = (JPanel) this.getContentPane();\n        contentPane.setLayout(new FlowLayout());\n        contentPane.add(btnPlay);\n        btnPlay.addActionListener(this);\n\n        this.setSize(1000, 700);\n        this.setLocationRelativeTo(null);\n        this.setVisible(true);\n\n    }\n\n    @Override\n    public void actionPerformed(ActionEvent e) {\n\n    }\n}\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/sixquiprend/Vue/Interface/Window.java b/src/main/java/com/example/sixquiprend/Vue/Interface/Window.java
+--- a/src/main/java/com/example/sixquiprend/Vue/Interface/Window.java	(revision c62a12523ef0484fbf85f5646bf77633137f0050)
++++ b/src/main/java/com/example/sixquiprend/Vue/Interface/Window.java	(date 1685293776394)
+@@ -21,7 +21,6 @@
+         this.setSize(1000, 700);
+         this.setLocationRelativeTo(null);
+         this.setVisible(true);
+-
+     }
+ 
+     @Override
