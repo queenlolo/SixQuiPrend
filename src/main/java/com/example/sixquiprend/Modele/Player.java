@@ -38,4 +38,11 @@ public class Player {
     public void setplayCards (List<Cards> playCards){
         this.playCards = playCards;
     }
+
+    public Cards chooseCard() {
+        return null;
+    }
+
+    public void removeFromHand(Cards chosenCard) {
+    }
 }
