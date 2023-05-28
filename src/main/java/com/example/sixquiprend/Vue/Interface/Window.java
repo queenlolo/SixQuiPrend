@@ -11,14 +11,20 @@ public class Window extends JFrame implements ActionListener {
 
     public Window() {
         super("6 Qui Prend");
-        this.setDefaultCloseOperation(3);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel contentPane = (JPanel) this.getContentPane();
         contentPane.setLayout(new FlowLayout());
+
+        JLabel fond = new JLabel(new ImageIcon("../Image/menu.jpg"));
+        contentPane.add(fond);
+
         contentPane.add(btnPlay);
         btnPlay.addActionListener(this);
 
         this.setSize(1000, 700);
+        fond.setBounds(0, 0, getWidth(), getHeight());
+
         this.setLocationRelativeTo(null);
         this.setVisible(true);
 
