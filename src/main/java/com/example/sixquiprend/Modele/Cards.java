@@ -36,7 +36,7 @@ public class Cards {
     public static List<Cards> card2() {
         // Initialiser les cartes avec les valeurs de 1 à 104
         for (int i = 1; i <= 104; i++) {
-            Cards card = new Cards(0, 0);
+            Cards card = new Cards(0, 0,"test");
             // jsp pq il faut supprimer link pour qu'il n'y est plus d'erreur
             cards.add(card);
             allCards.add(card);
