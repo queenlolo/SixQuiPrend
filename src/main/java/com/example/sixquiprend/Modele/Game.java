@@ -1,6 +1,9 @@
 package com.example.sixquiprend.Modele;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Game {
+    private List<Player> players;
     private Player winner;
     private int nbPlayers;
     private int score;
@@ -35,12 +38,25 @@ public class Game {
         this.numRound= numRound;
     }
     public void calculateScore(){
-
+        int totalNbBeefs = 0;
+        for (Player player : players) {
+            totalNbBeefs += player.getNbBeefs();
+        }
+        score += totalNbBeefs;
     }
+
+
     public void showWinner(){
-
+        if (winner != null) {
+            System.out.println("The winner is: " + winner.getName());
+        } else {
+            System.out.println("No winner.");
+        }
     }
+
+
     public void showRound(){
+        System.out.println("Round : " + numRound);
 
     }
 }
