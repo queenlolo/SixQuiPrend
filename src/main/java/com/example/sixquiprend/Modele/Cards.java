@@ -14,7 +14,7 @@ public class Cards {
     public Cards(int value, int nbBeefs, String link) {
         this.value = value;
         this.nbBeefs = nbBeefs;
-        this.link = "imgCartes/" + link;
+        this.link = "file:src/main/java/com/example/sixquiprend/Vue/ImageCards/" + link;
     }
 
     public static int beef(int numCard, int i) {
