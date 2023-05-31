@@ -1,37 +1,39 @@
 package com.example.sixquiprend;
 
+import com.example.sixquiprend.Vue.Interface.MainController;
+import com.example.sixquiprend.Vue.Interface.MainStage;
+import com.example.sixquiprend.Vue.Interface.PrimaryController;
+import com.example.sixquiprend.Vue.Interface.PrimaryStage;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-
 public class HelloApplication extends Application {
-
-    private Button btnPlay = new Button("Play");
+    Stage stage;
     @Override
-    public void start(Stage primaryStage)  {
-        primaryStage.setTitle("6 Qui Prend");
+    public void start(Stage stage)  {
+        this.stage = stage;
+        showPrimaryStage();
+    }
 
-        Image image = new Image("file:src/main/java/com/example/sixquiprend/Vue/Image/menu.jpg");
-        ImageView imageView = new ImageView(image);
-        imageView.setFitWidth(1000);
-        imageView.setFitHeight(700);
+    public void showPrimaryStage(){
+        PrimaryStage primaryStage = new PrimaryStage();
+        PrimaryController primaryController = new PrimaryController(primaryStage, this);
 
-        StackPane root = new StackPane();
-        root.getChildren().addAll(imageView, btnPlay);
+        Scene scene = new Scene(primaryStage, 1000, 700);
+        stage.setTitle("6 Qui Prend");
+        stage.setScene(scene);
+        stage.show();
+    }
 
-        Scene scene = new Scene(root, 1000, 700);
+    public void showMainStage(){
+        MainStage mainStage = new MainStage();
+        MainController mainController = new MainController(mainStage);
 
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        Scene scene = new Scene(mainStage, 1000, 700);
+        stage.setTitle("6 Qui Prend");
+        stage.setScene(scene);
+        stage.show();
     }
 
     public static void main(String[] args) {
