@@ -1,49 +1,83 @@
 package com.example.sixquiprend.Vue.Interface;
 
-import javafx.scene.control.Alert;
-import javafx.scene.layout.StackPane;
+import com.example.sixquiprend.Modele.*;
 
-import java.awt.*;
-import java.io.File;
+import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
+import javafx.geometry.Insets;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainStage extends StackPane {
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    private ArrayList<Image> imPlayer;
-    private  ArrayList<Image> imAI;
-    private Image image1;
-    private Image image2;
-    private Image image3;
-    private Image image4;
-
+    HBox hBox = new HBox();
+    HBox hBox2 = new HBox();
+    VBox vBox = new VBox();
 
     public MainStage(){
         alert.setTitle("Information message");
         alert.setHeaderText(null);
         alert.setContentText("Welcome to our 6 qui prend\n\n\n" + "Lorlay, Massil, Lorie");
         alert.showAndWait();
-        this.getChildren().addAll();
 
         MainController.askName();
 
+        vBox.setSpacing(400);
+
+        List<Cards> cards = Cards.card2();
+        Deck deck = new Deck(cards);
+
+        List<Player> players = new ArrayList<>();
+        players.add(new Player("Player 1"));
+        players.add(new Player("Player 2"));
+
+        deck.distribute(players);
+
+        FlowPane cardsContainer = new FlowPane();
+        FlowPane cardsContainer2 = new FlowPane();
+
+        cardsContainer.setPrefWidth(920);
+        cardsContainer.setPrefHeight(200);
+        cardsContainer.setHgap(0);
+        cardsContainer.setVgap(0);
+        cardsContainer.setPadding(new Insets(0));
+
+        cardsContainer2.setPrefWidth(920);
+        cardsContainer2.setPrefHeight(200);
+        cardsContainer2.setHgap(0);
+        cardsContainer2.setVgap(0);
+        cardsContainer2.setPadding(new Insets(0));
+
+        Player player1 = players.get(0);
+        Player player2 = players.get(1);
+
+        for (Cards card : player1.getHand()) {
+            Image image = new Image(card.getLink());
+            Image newImage = MainController.cropImage(image, 180, 180);
+            ImageView imageView = new ImageView(newImage);
+            imageView.setFitWidth(90);
+            imageView.setFitHeight(170);
+
+            cardsContainer.getChildren().add(imageView);
+        }
+
+        for (Cards card : player2.getHand()) {
+            Image image = new Image("file:src/main/java/com/example/sixquiprend/Vue/ImageCards/dos.png");
+            Image newImage = MainController.cropImage(image, 180, 180);
+            ImageView imageView = new ImageView(newImage);
+            imageView.setFitWidth(90);
+            imageView.setFitHeight(170);
+
+            cardsContainer2.getChildren().add(imageView);
+        }
+
+        hBox.getChildren().add(cardsContainer);
+        hBox2.getChildren().add(cardsContainer2);
+        vBox.getChildren().addAll(hBox2, hBox);
+
+        this.getChildren().add(vBox);
 
     }
-
-    void initArrayListsImages()
-    {
-        this.imPlayer = new ArrayList();
-        this.imAI = new ArrayList();
-    }
-
-    void init(){
-        initArrayListsImages();
-        this.image1 = null;
-        this.image2 = null;
-        this.image3 = null;
-        this.image4 = null;
-
-    }
-
-
-
 }
