@@ -1,12 +1,16 @@
 package com.example.sixquiprend.Vue.Interface;
 
 import javafx.scene.control.Alert;
-import javafx.scene.control.TextInputDialog;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+
+import java.awt.*;
+import java.util.ArrayList;
 
 public class MainStage extends StackPane {
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    private ArrayList<Image> imPlayer;
+    private  ArrayList<Image> imAI;
 
     public MainStage(){
         alert.setTitle("Information message");
@@ -15,18 +19,19 @@ public class MainStage extends StackPane {
         alert.showAndWait();
         this.getChildren().addAll();
 
-        askName();
+        MainController.askName();
+
+
     }
 
-    public void askName(){
-        TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("Name");
-        dialog.setHeaderText(null);
-        dialog.setContentText("Choose your name:");
-        dialog.showAndWait().ifPresent(userName -> {
-            String name = userName;
-        });
+    void initArrayListsImages()
+    {
+        this.imPlayer = new ArrayList();
+        this.imAI = new ArrayList();
+    }
 
+    void init(){
+        initArrayListsImages();
     }
 
 }
