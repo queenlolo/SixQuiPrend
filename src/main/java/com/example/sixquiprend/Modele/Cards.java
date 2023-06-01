@@ -54,16 +54,12 @@ public class Cards {
         List<Cards> card2 = new ArrayList<>();
         // Initialiser les cartes avec les valeurs de 1 à 104
         for (int i = 1; i <= 104; i++) {
-            Cards newCard = new Cards(0, 0, i + ".png");
-            card2.add(newCard);
-            // jsp pq il faut supprimer link pour qu'il n'y ait plus d'erreur
-            cards.add(newCard);
-            allCards.add(newCard);
-            cards.get(i - 1).setValue(i);
-            allCards.get(i - 1).setValue(i);
-            beef(cards.get(i - 1).getValue(), i);
-            beef(allCards.get(i - 1).getValue(), i);
-        }
+    Cards card = new Cards(i, 0, i + ".png");
+    card2.add(card);
+    cards.add(card);
+    allCards.add(card);
+    card.setNbBeefs(beef(card.getValue(), i));
+    }
 
         return card2;
     }
