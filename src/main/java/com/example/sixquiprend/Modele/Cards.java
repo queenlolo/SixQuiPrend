@@ -5,16 +5,16 @@ import java.util.List;
 
 public class Cards {
 
-    protected String link;
+    //protected String link;
     private int value;
     private int nbBeefs;
     public static List<Cards> cards = new ArrayList<>();
     public static List<Cards> allCards = new ArrayList<>();
 
-    public Cards(int value, int nbBeefs, String link) {
+    public Cards(int value, int nbBeefs) {
         this.value = value;
         this.nbBeefs = nbBeefs;
-        this.link = "imgCartes/" + link;
+       // this.link = "imgCartes/" + link;
     }
 
     public static int beef(int numCard, int i) {
@@ -37,19 +37,15 @@ public class Cards {
         List<Cards> card2 = new ArrayList<>();
         // Initialiser les cartes avec les valeurs de 1 à 104
         for (int i = 1; i <= 104; i++) {
-            Cards card = new Cards(0, 0,"test");
-            card2.add(card);
-            // jsp pq il faut supprimer link pour qu'il n'y est plus d'erreur
+            Cards card = new Cards(i, 0);
             cards.add(card);
-            allCards.add(card);
-            cards.get(i - 1).value = i;
-            allCards.get(i - 1).value = i;
-            beef(cards.get(i - 1).value, i);
-            beef(allCards.get(i - 1).value, i);
+            beef(card.getValue(), i);
         }
 
-        return card2;
+        return cards;
     }
+
+
 
     public int getValue() {
         return value;
@@ -67,12 +63,12 @@ public class Cards {
         this.nbBeefs = nbBeefs;
     }
 
-    public String getLink() {
-        return this.link;
-    }
+    //public String getLink() {
+        //return this.link;
+    //}
 
     // Affichage
-    public void afficher() {
-        System.out.println("Link: " + this.link + ", Value: " + this.value);
-    }
+   // public void afficher() {
+        //System.out.println("Link: " + this.link + ", Value: " + this.value);
+    //}
 }

@@ -8,29 +8,26 @@ import java.util.ArrayList;
 import java.util.List;
 public class Main {
     public static void main(String[] args) {
-        // Création du paquet de cartes
-        List<Cards> cards = new ArrayList<>();
-        // Ajoutez ici les cartes au paquet
+        Player joueur1 = new Player("Joueur 1");
+        Player joueur2 = new Player("Joueur 2");
 
-        // Création de l'instance de Deck
-        Deck deck = new Deck(cards);
+        // Création d'une liste de joueurs
+        List<Player> joueurs = new ArrayList<>();
+        joueurs.add(joueur1);
+        joueurs.add(joueur2);
 
-        // Création des joueurs
-        List<Player> players = new ArrayList<>();
-        players.add(new Player("Joueur 1"));
-        players.add(new Player("Joueur 2"));
-
-        // Mélange des cartes
+        // Création du deck
+        Deck deck = new Deck();
         deck.shuffle();
+        deck.distribute(joueurs);
 
-        // Distribution des cartes aux joueurs
-        deck.distribute(players);
+        // Choix de carte pour chaque joueur
+        Cards carteJoueur1 = joueur1.chooseCard();
+        Cards carteJoueur2 = joueur2.chooseCard();
 
-        // Affichage de la main de chaque joueur
-        for (Player player : players) {
-            System.out.println(player.getName() + ": " + player.getHand());
-        }
+        // Affichage des cartes choisies
+        System.out.println("Carte choisie par " + joueur1.getName() + ": " + carteJoueur1);
+        System.out.println("Carte choisie par " + joueur2.getName() + ": " + carteJoueur2);
     }
-
 }
 
