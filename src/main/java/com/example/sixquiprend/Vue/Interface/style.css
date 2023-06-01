@@ -1,0 +1,25 @@
+.btnPlay {
+    -fx-background-color: linear-gradient(white, gainsboro);
+    -fx-pref-width: 200px;
+    -fx-pref-height: 80px;
+    -fx-font-family: impact;
+    -fx-font-size: 30px;
+    -fx-text-fill: darkslateblue;
+    -fx-background-radius: 10px;
+    -fx-border-color: darkslateblue;
+    -fx-border-width: 3px;
+    -fx-border-radius: 8px;
+}
+
+.btnPlay:pressed {
+    -fx-background-color: linear-gradient(gray, darkgray);
+        -fx-pref-width: 200px;
+        -fx-pref-height: 80px;
+        -fx-font-family: impact;
+        -fx-font-size: 30px;
+        -fx-text-fill: darkslateblue;
+        -fx-background-radius: 10px;
+        -fx-border-color: darkslateblue;
+        -fx-border-width: 3px;
+        -fx-border-radius: 8px;
+}
