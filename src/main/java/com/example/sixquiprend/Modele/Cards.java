@@ -41,14 +41,9 @@ public class Cards {
         // Initialiser les cartes avec les valeurs de 1 à 104
         for (int i = 1; i <= 104; i++) {
             Cards card = new Cards(0, 0,i+".png");
-            card2.add(card);
-            // jsp pq il faut supprimer link pour qu'il n'y est plus d'erreur
             cards.add(card);
-            allCards.add(card);
-            cards.get(i - 1).value = i;
-            allCards.get(i - 1).value = i;
-            beef(cards.get(i - 1).value, i);
-            beef(allCards.get(i - 1).value, i);
+            beef(card.getValue(), i);
+
         }
 
         return card2;
