@@ -1,37 +1,17 @@
 package com.example.sixquiprend.Vue.Interface;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
-public class Window extends JFrame implements ActionListener {
+public class Window extends Application {
 
-    private JButton btnPlay = new JButton("Play");
-
-    public Window() {
-        super("6 Qui Prend");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        JPanel contentPane = (JPanel) this.getContentPane();
-        contentPane.setLayout(new FlowLayout());
-
-        JLabel fond = new JLabel(new ImageIcon("../Image/menu.jpg"));
-        contentPane.add(fond);
-
-        contentPane.add(btnPlay);
-        btnPlay.addActionListener(this);
-
-        this.setSize(1000, 700);
-        fond.setBounds(0, 0, getWidth(), getHeight());
-
-        this.setLocationRelativeTo(null);
-        this.setVisible(true);
-
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
+    private Button btnPlay = new Button("Play");
+    public void start(Stage primaryStage) {
 
     }
 }
