@@ -1,5 +1,6 @@
 package com.example.sixquiprend;
 
+import com.example.sixquiprend.Modele.Cards;
 import com.example.sixquiprend.Vue.Interface.MainController;
 import com.example.sixquiprend.Vue.Interface.MainStage;
 import com.example.sixquiprend.Vue.Interface.PrimaryController;
@@ -39,5 +40,6 @@ public class HelloApplication extends Application {
 
     public static void main(String[] args) {
         launch(args);
+        System.out.println(Cards.card2().toString());
     }
 }

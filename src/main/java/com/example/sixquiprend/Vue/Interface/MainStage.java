@@ -1,16 +1,21 @@
 package com.example.sixquiprend.Vue.Interface;
 
 import javafx.scene.control.Alert;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 
 import java.awt.*;
+import java.io.File;
 import java.util.ArrayList;
 
 public class MainStage extends StackPane {
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
     private ArrayList<Image> imPlayer;
     private  ArrayList<Image> imAI;
+    private Image image1;
+    private Image image2;
+    private Image image3;
+    private Image image4;
+
 
     public MainStage(){
         alert.setTitle("Information message");
@@ -32,6 +37,13 @@ public class MainStage extends StackPane {
 
     void init(){
         initArrayListsImages();
+        this.image1 = null;
+        this.image2 = null;
+        this.image3 = null;
+        this.image4 = null;
+
     }
+
+
 
 }
