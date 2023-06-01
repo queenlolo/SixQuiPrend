@@ -34,9 +34,11 @@ public class Cards {
     }
 
     public static List<Cards> card2() {
+        List<Cards> card2 = new ArrayList<>();
         // Initialiser les cartes avec les valeurs de 1 à 104
         for (int i = 1; i <= 104; i++) {
             Cards card = new Cards(0, 0,"test");
+            card2.add(card);
             // jsp pq il faut supprimer link pour qu'il n'y est plus d'erreur
             cards.add(card);
             allCards.add(card);
@@ -46,7 +48,7 @@ public class Cards {
             beef(allCards.get(i - 1).value, i);
         }
 
-        return cards;
+        return card2;
     }
 
     public int getValue() {

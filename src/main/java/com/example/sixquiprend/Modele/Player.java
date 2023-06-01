@@ -1,7 +1,5 @@
 package com.example.sixquiprend.Modele;
 
-import com.example.sixquiprend.Modele.Cards;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,12 +8,14 @@ public class Player {
     private int nbCards;
     private int nbBeefs;
     private List<Cards> playCards;
+    private List<Cards> hand;
 
     public Player(String name) {
         this.name = name;
         this.nbCards = 0;
         this.nbBeefs = 0;
         this.playCards = new ArrayList<>();
+        this.hand = new ArrayList<>();
     }
 
     public String getName() {
@@ -54,5 +54,12 @@ public class Player {
 
     public void removeFromHand(Cards chosenCard) {
         playCards.remove(chosenCard);
+    }
+
+    public void setHand(List<Cards> playerCards) {
+        this.hand = hand;
+    }
+    public Object getHand() {
+        return hand;
     }
 }
