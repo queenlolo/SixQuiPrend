@@ -10,6 +10,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+
         int numPlayers = 2;
         GameLogic game = new GameLogic(numPlayers);
         game.playGame();

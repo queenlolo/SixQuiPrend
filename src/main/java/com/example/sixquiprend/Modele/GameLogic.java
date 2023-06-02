@@ -46,22 +46,13 @@ public class GameLogic {
 
     private void initializeGame() {
         deck.shuffle();
-        dealCards();
+        deck.distribute( players);
         board.reset();
         clearPlayerPiles();
     }
 
-    private void dealCards() {
-        for (int i = 0; i < players.size(); i++) {
-            Player player = players.get(i);
-            List<Cards> hand = playerHands.get(i);
 
-            for (int j = 0; j < Player.MAX_HAND_SIZE; j++) {
-                Cards card = deck.drawCard();
-                hand.add(card);
-            }
-        }
-    }
+
 
     private void clearPlayerPiles() {
         for (List<Cards> pile : playerPiles) {
@@ -125,10 +116,10 @@ public class GameLogic {
         for (Player player : players) {
             int score = player.getScore();
             scores.add(score);
-            System.out.println("Score du Joueur " + player.getName() + ": " + score);
+            System.out.println("Score of the player " + player.getName() + ": " + score);
         }
 
-        System.out.println("Le joueur avec le plus petit score a gagné :");
+        System.out.println("The player with the lowest score wins. :");
         int smallestScore = scores.stream().min(Integer::compare).orElse(0);
     }
 }
