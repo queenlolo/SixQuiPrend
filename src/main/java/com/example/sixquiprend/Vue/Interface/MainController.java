@@ -77,7 +77,9 @@ public class MainController {
             card.setTranslateX(0);
             card.setTranslateY(0);
 
-
+            // Mettre à jour les propriétés d'index de colonne et de ligne
+            GridPane.setColumnIndex(card, targetColumn);
+            GridPane.setRowIndex(card, targetRow);
         });
     }
 
