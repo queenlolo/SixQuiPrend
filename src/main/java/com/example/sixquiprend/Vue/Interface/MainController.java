@@ -73,6 +73,10 @@ public class MainController {
             // Ajouter la carte à la position cible
             gridPane.add(card, targetColumn, targetRow);
 
+            // Ajuster les propriétés translateX et translateY de la carte pour réinitialiser les transformations précédentes
+            card.setTranslateX(0);
+            card.setTranslateY(0);
+
 
         });
     }
