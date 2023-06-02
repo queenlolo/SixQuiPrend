@@ -3,10 +3,12 @@ package com.example.sixquiprend.Modele;
 import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Random;
+
 import static com.example.sixquiprend.Modele.Cards.card2;
 
 public class Deck {
-    private List<Cards> cards;
+    private static List<Cards> cards;
     //supp
     private List<Cards> card2;
 
@@ -52,6 +54,21 @@ public class Deck {
 
         Cards drawnCard = cards.remove(0);
         return drawnCard;
+    }
+
+    public static List<Cards> drawRandomCards(int numCards) {
+        List<Cards> randomCards = new ArrayList<>();
+        Random random = new Random();
+
+        for (int i = 0; i < numCards; i++) {
+            if (!cards.isEmpty()) {
+                int randomIndex = random.nextInt(cards.size());
+                Cards randomCard = cards.remove(randomIndex);
+                randomCards.add(randomCard);
+            }
+        }
+
+        return randomCards;
     }
 
     public List<Cards> getCards() {

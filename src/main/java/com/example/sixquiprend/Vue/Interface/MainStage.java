@@ -93,10 +93,10 @@ public class MainStage extends StackPane {
                 gridPane.add(card, col, row);
             }
         }
+        List<Cards> drawnCards = deck.drawRandomCards(4);
 
         for (int row = 0; row < numRows; row++) {
-            if (row < 4 && row < player1.getHand().size()) {
-                Cards card = player1.getHand().get(row);
+                Cards card = drawnCards.get(row);
                 Image image = new Image(card.getLink());
                 Image newImage = MainController.cropImage(image, 180, 180);
                 ImageView imageView = new ImageView(newImage);
@@ -104,12 +104,7 @@ public class MainStage extends StackPane {
                 imageView.setFitHeight(140);
 
                 gridPane.add(imageView, 0, row);
-            } else {
-                Rectangle card = new Rectangle(cardWidth, cardHeight, Color.WHITE);
-                card.setStroke(Color.BLACK);
-                gridPane.add(card, 0, row);
             }
-        }
         vBox.getChildren().addAll(hBox2,gridPane, hBox);
 
 

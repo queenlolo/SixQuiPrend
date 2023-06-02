@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="471e4523-89e7-4b0c-9ac2-5f215e9487e5" name="Changes" comment="afficher carte">
+    <list default="true" id="471e4523-89e7-4b0c-9ac2-5f215e9487e5" name="Changes" comment="carte piles">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Modele/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Modele/Board.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Modele/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Modele/Deck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Modele/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Modele/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Vue/Interface/MainStage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Vue/Interface/MainStage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -183,7 +181,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685687909935</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="carte piles">
+      <created>1685692575953</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1685692575953</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -205,7 +210,8 @@
     <MESSAGE value="GameLogic/board" />
     <MESSAGE value="distribuer/choisir carte" />
     <MESSAGE value="afficher carte" />
-    <option name="LAST_COMMIT_MESSAGE" value="afficher carte" />
+    <MESSAGE value="carte piles" />
+    <option name="LAST_COMMIT_MESSAGE" value="carte piles" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
