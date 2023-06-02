@@ -65,11 +65,6 @@ public class Cards {
     }
 
 
-
-    public String toString() {
-        return "Card [numCard=" + getValue() + ", nbBeefs=" + getNbBeefs() + ", link=" + getLink() + "]";
-    }
-
     public int getValue() {
         return value;
     }
@@ -87,7 +82,7 @@ public class Cards {
     }
 
     public String getLink() {
-        return this.link;
+        return link;
     }
 
     // Affichage

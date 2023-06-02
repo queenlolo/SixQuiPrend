@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="471e4523-89e7-4b0c-9ac2-5f215e9487e5" name="Changes" comment="GameLogic2">
+    <list default="true" id="471e4523-89e7-4b0c-9ac2-5f215e9487e5" name="Changes" comment="distribuer/choisir carte">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Console/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Console/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Modele/GameLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Modele/GameLogic.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -158,21 +160,7 @@
       <option name="project" value="LOCAL" />
       <updated>1685695454320</updated>
     </task>
-    <task id="LOCAL-00014" summary="GameLogic2">
-      <created>1685704634739</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1685704634739</updated>
-    </task>
-    <task id="LOCAL-00015" summary="GameLogic2">
-      <created>1685708186106</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1685708186106</updated>
-    </task>
-    <option name="localTasksCounter" value="16" />
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -193,8 +181,7 @@
     <MESSAGE value="correction bug" />
     <MESSAGE value="GameLogic/board" />
     <MESSAGE value="distribuer/choisir carte" />
-    <MESSAGE value="GameLogic2" />
-    <option name="LAST_COMMIT_MESSAGE" value="GameLogic2" />
+    <option name="LAST_COMMIT_MESSAGE" value="distribuer/choisir carte" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

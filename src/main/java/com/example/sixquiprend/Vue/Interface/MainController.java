@@ -2,10 +2,15 @@ package com.example.sixquiprend.Vue.Interface;
 
 import javafx.application.Platform;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.image.Image;
+import javafx.scene.image.PixelReader;
+import javafx.scene.image.WritableImage;
 
 public class MainController {
-    public MainController(MainStage mainStage) {
 
+    private MainStage mainStage;
+    public MainController(MainStage mainStage) {
+        this.mainStage = mainStage;
     }
     public static void askName(){
         TextInputDialog dialog = new TextInputDialog();
@@ -25,6 +30,19 @@ public class MainController {
     static void close() {
         Platform.exit();
         System.exit(0);
+    }
+
+    static Image cropImage(Image image, int cropLeft, int cropRight) {
+        int originalWidth = (int) image.getWidth();
+        int originalHeight = (int) image.getHeight();
+        int cropX = cropLeft;
+        int cropY = 0;
+        int cropWidth = originalWidth - cropLeft - cropRight;
+        int cropHeight = originalHeight;
+        PixelReader reader = image.getPixelReader();
+        WritableImage croppedImage = new WritableImage(reader, cropX, cropY, cropWidth, cropHeight);
+
+        return croppedImage;
     }
 
 }
