@@ -34,7 +34,6 @@ public class GameLogic {
 
     public void playGame() {
         initializeGame();
-
         while (!isGameOver()) {
             playRound();
             updateScore();
