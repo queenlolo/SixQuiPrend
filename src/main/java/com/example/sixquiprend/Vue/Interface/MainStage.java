@@ -12,7 +12,6 @@ import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class MainStage extends StackPane {
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -63,9 +62,9 @@ public class MainStage extends StackPane {
             ImageView imageView = new ImageView(newImage);
             imageView.setFitWidth(90);
             imageView.setFitHeight(140);
+
             MainController.changeCardPosition(imageView);
             cardsContainer.getChildren().add(imageView);
-
         }
 
         for (Cards card : player2.getHand()) {

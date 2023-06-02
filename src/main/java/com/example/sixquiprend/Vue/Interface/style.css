@@ -23,3 +23,7 @@
         -fx-border-width: 3px;
         -fx-border-radius: 8px;
 }
+
+.root {
+    -fx-background-image: url("file:src/main/java/com/example/sixquiprend/Vue/Image/fond.jpg");
+}

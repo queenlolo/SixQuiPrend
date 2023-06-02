@@ -15,6 +15,7 @@ public class MainController {
     private MainStage mainStage;
     public MainController(MainStage mainStage) {
         this.mainStage = mainStage;
+        mainStage.getStylesheets().add("file:src/main/java/com/example/sixquiprend/Vue/Interface/style.css");
     }
     public static void askName(){
         TextInputDialog dialog = new TextInputDialog();
