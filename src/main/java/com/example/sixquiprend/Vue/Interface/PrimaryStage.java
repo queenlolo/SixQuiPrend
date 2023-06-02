@@ -11,7 +11,7 @@ public class PrimaryStage extends StackPane {
     ImageView imageView = new ImageView(image);
 
     public PrimaryStage(){
-        imageView.setFitWidth(1000);
+        imageView.setFitWidth(920);
         imageView.setFitHeight(700);
         btnPlay.getStyleClass().add("btnPlay");
 

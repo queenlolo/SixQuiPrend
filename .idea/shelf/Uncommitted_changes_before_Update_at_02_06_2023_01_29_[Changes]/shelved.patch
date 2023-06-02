@@ -1,0 +1,374 @@
+Index: src/main/java/com/example/sixquiprend/Modele/Cards.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.sixquiprend.Modele;\n\nimport java.util.ArrayList;\nimport java.util.List;\n\npublic class Cards {\n\n    protected String link;\n    private int value;\n    private int nbBeefs;\n    public static List<Cards> cards = new ArrayList<>();\n    public static List<Cards> allCards = new ArrayList<>();\n    private List<Integer> card;\n\n    public Cards(int value, int nbBeefs, String link) {\n        this.value = value;\n        this.nbBeefs = nbBeefs;\n        this.link = \"file:src/main/java/com/example/sixquiprend/Vue/ImageCards/\" + link;\n        card = new ArrayList<>();\n        // Ajouter des éléments à la liste cards\n        card.add(1);\n        card.add(2);\n        card.add(3);\n        // ...\n    }\n    public List<Integer> getCard() {\n        return card;\n    }\n\n    public void setCard(List<Integer> card) {\n        this.card = card;\n    }\n\n    public static int beef(int numCard, int i) {\n        if (numCard % 10 == 5) {\n            cards.get(i - 1).nbBeefs = 2;\n        }\n        if (numCard % 10 == 0) {\n            cards.get(i - 1).nbBeefs = 3;\n        }\n        if (numCard % 11 == 0) {\n            cards.get(i - 1).nbBeefs = 5;\n        }\n        if (numCard % 10 != 5 && numCard % 10 != 0 && numCard % 11 != 0) {\n            cards.get(i - 1).nbBeefs = 1;\n        }\n        if (numCard == 55){\n            cards.get(i - 1).nbBeefs = 7;\n        }\n        return cards.get(i - 1).nbBeefs;\n    }\n\n    public static List<Cards> card2() {\n        List<Cards> card2 = new ArrayList<>();\n        // Initialiser les cartes avec les valeurs de 1 à 104\n        for (int i = 1; i <= 104; i++) {\n    Cards card = new Cards(i, 0, i + \".png\");\n    card2.add(card);\n    cards.add(card);\n    allCards.add(card);\n    card.setNbBeefs(beef(card.getValue(), i));\n    }\n\n        return card2;\n    }\n\n\n\n    public String toString() {\n        return \"Card [numCard=\" + getValue() + \", nbBeefs=\" + getNbBeefs() + \", link=\" + getLink() + \"]\";\n    }\n\n    public int getValue() {\n        return value;\n    }\n\n    public void setValue(int value) {\n        this.value = value;\n    }\n\n    public int getNbBeefs() {\n        return nbBeefs;\n    }\n\n    public void setNbBeefs(int nbBeefs) {\n        this.nbBeefs = nbBeefs;\n    }\n\n    public String getLink() {\n        return this.link;\n    }\n\n    // Affichage\n    public void afficher() {\n        System.out.println(\"Link: \" + this.link + \", Value: \" + this.value);\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/sixquiprend/Modele/Cards.java b/src/main/java/com/example/sixquiprend/Modele/Cards.java
+--- a/src/main/java/com/example/sixquiprend/Modele/Cards.java	(revision ee4de7170669ceb20e572d203b5c3caebbfb191f)
++++ b/src/main/java/com/example/sixquiprend/Modele/Cards.java	(date 1685657874703)
+@@ -65,11 +65,6 @@
+     }
+ 
+ 
+-
+-    public String toString() {
+-        return "Card [numCard=" + getValue() + ", nbBeefs=" + getNbBeefs() + ", link=" + getLink() + "]";
+-    }
+-
+     public int getValue() {
+         return value;
+     }
+@@ -87,7 +82,7 @@
+     }
+ 
+     public String getLink() {
+-        return this.link;
++        return link;
+     }
+ 
+     // Affichage
+Index: src/main/java/com/example/sixquiprend/HelloApplication.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.sixquiprend;\n\nimport com.example.sixquiprend.Modele.Cards;\nimport com.example.sixquiprend.Vue.Interface.MainController;\nimport com.example.sixquiprend.Vue.Interface.MainStage;\nimport com.example.sixquiprend.Vue.Interface.PrimaryController;\nimport com.example.sixquiprend.Vue.Interface.PrimaryStage;\nimport javafx.application.Application;\nimport javafx.scene.Scene;\nimport javafx.stage.Stage;\n\npublic class HelloApplication extends Application {\n    Stage stage;\n    @Override\n    public void start(Stage stage)  {\n        this.stage = stage;\n        showPrimaryStage();\n    }\n\n    public void showPrimaryStage(){\n        PrimaryStage primaryStage = new PrimaryStage();\n        PrimaryController primaryController = new PrimaryController(primaryStage, this);\n\n        Scene scene = new Scene(primaryStage, 1000, 700);\n        stage.setTitle(\"6 Qui Prend\");\n        stage.setScene(scene);\n        stage.show();\n    }\n\n    public void showMainStage(){\n        MainStage mainStage = new MainStage();\n        MainController mainController = new MainController(mainStage);\n\n        Scene scene = new Scene(mainStage, 1000, 700);\n        stage.setTitle(\"6 Qui Prend\");\n        stage.setScene(scene);\n        stage.show();\n    }\n\n\n    public static void main(String[] args) {\n        launch(args);\n        System.out.println(Cards.card2().toString());\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/sixquiprend/HelloApplication.java b/src/main/java/com/example/sixquiprend/HelloApplication.java
+--- a/src/main/java/com/example/sixquiprend/HelloApplication.java	(revision ee4de7170669ceb20e572d203b5c3caebbfb191f)
++++ b/src/main/java/com/example/sixquiprend/HelloApplication.java	(date 1685659831556)
+@@ -1,6 +1,8 @@
+ package com.example.sixquiprend;
+ 
+-import com.example.sixquiprend.Modele.Cards;
++import com.example.sixquiprend.Modele.Player;
++import com.example.sixquiprend.Modele.Deck;
++import com.example.sixquiprend.Modele.GameLogic;
+ import com.example.sixquiprend.Vue.Interface.MainController;
+ import com.example.sixquiprend.Vue.Interface.MainStage;
+ import com.example.sixquiprend.Vue.Interface.PrimaryController;
+@@ -21,7 +23,7 @@
+         PrimaryStage primaryStage = new PrimaryStage();
+         PrimaryController primaryController = new PrimaryController(primaryStage, this);
+ 
+-        Scene scene = new Scene(primaryStage, 1000, 700);
++        Scene scene = new Scene(primaryStage, 920, 700);
+         stage.setTitle("6 Qui Prend");
+         stage.setScene(scene);
+         stage.show();
+@@ -31,15 +33,13 @@
+         MainStage mainStage = new MainStage();
+         MainController mainController = new MainController(mainStage);
+ 
+-        Scene scene = new Scene(mainStage, 1000, 700);
++        Scene scene = new Scene(mainStage, 920, 700);
+         stage.setTitle("6 Qui Prend");
+         stage.setScene(scene);
+         stage.show();
+     }
+ 
+-
+     public static void main(String[] args) {
+         launch(args);
+-        System.out.println(Cards.card2().toString());
+     }
+ }
+\ No newline at end of file
+Index: src/main/java/com/example/sixquiprend/Vue/Interface/PrimaryController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.sixquiprend.Vue.Interface;\n\nimport com.example.sixquiprend.HelloApplication;\nimport javafx.event.ActionEvent;\n\npublic class PrimaryController {\n    HelloApplication helloApplication;\n    private PrimaryStage primaryStage;\n\n    public PrimaryController(PrimaryStage primaryStage, HelloApplication helloApplication){\n        this.helloApplication = helloApplication;\n        this.primaryStage = primaryStage;\n        primaryStage.getStylesheets().add(\"file:src/main/java/com/example/sixquiprend/Vue/Interface/style.css\");\n        primaryStage.btnPlay.setOnAction(this::changeScene);\n    }\n\n    public void changeScene(ActionEvent e) {\n        helloApplication.showMainStage();\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/sixquiprend/Vue/Interface/PrimaryController.java b/src/main/java/com/example/sixquiprend/Vue/Interface/PrimaryController.java
+--- a/src/main/java/com/example/sixquiprend/Vue/Interface/PrimaryController.java	(revision ee4de7170669ceb20e572d203b5c3caebbfb191f)
++++ b/src/main/java/com/example/sixquiprend/Vue/Interface/PrimaryController.java	(date 1685657888717)
+@@ -1,6 +1,7 @@
+ package com.example.sixquiprend.Vue.Interface;
+ 
+ import com.example.sixquiprend.HelloApplication;
++import com.example.sixquiprend.Modele.GameLogic;
+ import javafx.event.ActionEvent;
+ 
+ public class PrimaryController {
+@@ -17,4 +18,5 @@
+     public void changeScene(ActionEvent e) {
+         helloApplication.showMainStage();
+     }
++
+ }
+Index: src/main/java/com/example/sixquiprend/Vue/Interface/MainStage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.sixquiprend.Vue.Interface;\n\nimport javafx.scene.control.Alert;\nimport javafx.scene.layout.StackPane;\n\nimport java.awt.*;\nimport java.io.File;\nimport java.util.ArrayList;\n\npublic class MainStage extends StackPane {\n    Alert alert = new Alert(Alert.AlertType.INFORMATION);\n    private ArrayList<Image> imPlayer;\n    private  ArrayList<Image> imAI;\n    private Image image1;\n    private Image image2;\n    private Image image3;\n    private Image image4;\n\n\n    public MainStage(){\n        alert.setTitle(\"Information message\");\n        alert.setHeaderText(null);\n        alert.setContentText(\"Welcome to our 6 qui prend\\n\\n\\n\" + \"Lorlay, Massil, Lorie\");\n        alert.showAndWait();\n        this.getChildren().addAll();\n\n        MainController.askName();\n\n\n    }\n\n    void initArrayListsImages()\n    {\n        this.imPlayer = new ArrayList();\n        this.imAI = new ArrayList();\n    }\n\n    void init(){\n        initArrayListsImages();\n        this.image1 = null;\n        this.image2 = null;\n        this.image3 = null;\n        this.image4 = null;\n\n    }\n\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/sixquiprend/Vue/Interface/MainStage.java b/src/main/java/com/example/sixquiprend/Vue/Interface/MainStage.java
+--- a/src/main/java/com/example/sixquiprend/Vue/Interface/MainStage.java	(revision ee4de7170669ceb20e572d203b5c3caebbfb191f)
++++ b/src/main/java/com/example/sixquiprend/Vue/Interface/MainStage.java	(date 1685662181658)
+@@ -1,49 +1,83 @@
+ package com.example.sixquiprend.Vue.Interface;
+ 
++import com.example.sixquiprend.Modele.*;
++
+ import javafx.scene.control.Alert;
+-import javafx.scene.layout.StackPane;
+-
+-import java.awt.*;
+-import java.io.File;
++import javafx.scene.image.Image;
++import javafx.scene.image.ImageView;
++import javafx.scene.layout.*;
++import javafx.geometry.Insets;
+ import java.util.ArrayList;
++import java.util.List;
+ 
+ public class MainStage extends StackPane {
+     Alert alert = new Alert(Alert.AlertType.INFORMATION);
+-    private ArrayList<Image> imPlayer;
+-    private  ArrayList<Image> imAI;
+-    private Image image1;
+-    private Image image2;
+-    private Image image3;
+-    private Image image4;
+-
++    HBox hBox = new HBox();
++    HBox hBox2 = new HBox();
++    VBox vBox = new VBox();
+ 
+     public MainStage(){
+         alert.setTitle("Information message");
+         alert.setHeaderText(null);
+         alert.setContentText("Welcome to our 6 qui prend\n\n\n" + "Lorlay, Massil, Lorie");
+         alert.showAndWait();
+-        this.getChildren().addAll();
+ 
+         MainController.askName();
+ 
++        vBox.setSpacing(400);
++
++        List<Cards> cards = Cards.card2();
++        Deck deck = new Deck(cards);
+ 
+-    }
++        List<Player> players = new ArrayList<>();
++        players.add(new Player("Player 1"));
++        players.add(new Player("Player 2"));
++
++        deck.distribute(players);
++
++        FlowPane cardsContainer = new FlowPane();
++        FlowPane cardsContainer2 = new FlowPane();
++
++        cardsContainer.setPrefWidth(920);
++        cardsContainer.setPrefHeight(200);
++        cardsContainer.setHgap(0);
++        cardsContainer.setVgap(0);
++        cardsContainer.setPadding(new Insets(0));
++
++        cardsContainer2.setPrefWidth(920);
++        cardsContainer2.setPrefHeight(200);
++        cardsContainer2.setHgap(0);
++        cardsContainer2.setVgap(0);
++        cardsContainer2.setPadding(new Insets(0));
++
++        Player player1 = players.get(0);
++        Player player2 = players.get(1);
++
++        for (Cards card : player1.getHand()) {
++            Image image = new Image(card.getLink());
++            Image newImage = MainController.cropImage(image, 180, 180);
++            ImageView imageView = new ImageView(newImage);
++            imageView.setFitWidth(90);
++            imageView.setFitHeight(170);
+ 
+-    void initArrayListsImages()
+-    {
+-        this.imPlayer = new ArrayList();
+-        this.imAI = new ArrayList();
+-    }
++            cardsContainer.getChildren().add(imageView);
++        }
+ 
+-    void init(){
+-        initArrayListsImages();
+-        this.image1 = null;
+-        this.image2 = null;
+-        this.image3 = null;
+-        this.image4 = null;
++        for (Cards card : player2.getHand()) {
++            Image image = new Image("file:src/main/java/com/example/sixquiprend/Vue/ImageCards/dos.png");
++            Image newImage = MainController.cropImage(image, 180, 180);
++            ImageView imageView = new ImageView(newImage);
++            imageView.setFitWidth(90);
++            imageView.setFitHeight(170);
+ 
+-    }
++            cardsContainer2.getChildren().add(imageView);
++        }
+ 
++        hBox.getChildren().add(cardsContainer);
++        hBox2.getChildren().add(cardsContainer2);
++        vBox.getChildren().addAll(hBox2, hBox);
+ 
++        this.getChildren().add(vBox);
+ 
++    }
+ }
+Index: src/main/java/com/example/sixquiprend/Vue/Interface/MainController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.sixquiprend.Vue.Interface;\n\nimport javafx.application.Platform;\nimport javafx.scene.control.TextInputDialog;\n\npublic class MainController {\n    public MainController(MainStage mainStage) {\n\n    }\n    public static void askName(){\n        TextInputDialog dialog = new TextInputDialog();\n        dialog.setTitle(\"Name\");\n        dialog.setHeaderText(null);\n        dialog.setContentText(\"Choose your name:\");\n        dialog.showAndWait();\n        String userName = dialog.getResult();\n        if (userName == null){\n            close();\n        }\n        if (userName.isEmpty()) {\n            askName();\n        }\n    }\n\n    static void close() {\n        Platform.exit();\n        System.exit(0);\n    }\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/sixquiprend/Vue/Interface/MainController.java b/src/main/java/com/example/sixquiprend/Vue/Interface/MainController.java
+--- a/src/main/java/com/example/sixquiprend/Vue/Interface/MainController.java	(revision ee4de7170669ceb20e572d203b5c3caebbfb191f)
++++ b/src/main/java/com/example/sixquiprend/Vue/Interface/MainController.java	(date 1685659816514)
+@@ -2,10 +2,15 @@
+ 
+ import javafx.application.Platform;
+ import javafx.scene.control.TextInputDialog;
++import javafx.scene.image.Image;
++import javafx.scene.image.PixelReader;
++import javafx.scene.image.WritableImage;
+ 
+ public class MainController {
++
++    private MainStage mainStage;
+     public MainController(MainStage mainStage) {
+-
++        this.mainStage = mainStage;
+     }
+     public static void askName(){
+         TextInputDialog dialog = new TextInputDialog();
+@@ -27,4 +32,17 @@
+         System.exit(0);
+     }
+ 
+-}
++    static Image cropImage(Image image, int cropLeft, int cropRight) {
++        int originalWidth = (int) image.getWidth();
++        int originalHeight = (int) image.getHeight();
++        int cropX = cropLeft;
++        int cropY = 0;
++        int cropWidth = originalWidth - cropLeft - cropRight;
++        int cropHeight = originalHeight;
++        PixelReader reader = image.getPixelReader();
++        WritableImage croppedImage = new WritableImage(reader, cropX, cropY, cropWidth, cropHeight);
++
++        return croppedImage;
++    }
++
++}
+\ No newline at end of file
+Index: src/main/java/com/example/sixquiprend/Modele/Player.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.sixquiprend.Modele;\n\nimport java.util.ArrayList;\nimport java.util.List;\nimport java.util.Scanner;\n\n\npublic class Player {\n    public static final int MAX_HAND_SIZE = 10;\n    private String name;\n    private int nbCards;\n    private int nbBeefs;\n    private int score;\n    private List<Cards> hand;\n\n    public Player(String name) {\n        this.name = name;\n        this.nbCards = 0;\n        this.nbBeefs = 0;\n        this.score = 0;\n        this.hand = new ArrayList<>();\n    }\n\n    public String getName() {\n        return name;\n    }\n\n    public int getNbCards() {\n        return nbCards;\n    }\n\n    public void setNbCards(int nbCards) {\n        this.nbCards = nbCards;\n    }\n\n    public int getNbBeefs() {\n        return nbBeefs;\n    }\n\n    public void setNbBeefs(int nbBeefs) {\n        this.nbBeefs = nbBeefs;\n    }\n\n    public Cards chooseCard(List<Cards> hand) {\n        if (this.hand.isEmpty()) {\n            return null;\n        }\n\n        // Affiche hand\n        System.out.println(\"Hand of player\" + name + \":\");\n        for (int i = 0; i < this.hand.size(); i++) {\n            System.out.println((i + 1) + \". \" + this.hand.get(i));\n        }\n\n        //scanner permet de lire ce qu'écrit le joueur dans la console\n        int chosen = -1;\n        Scanner scanner = new Scanner(System.in);\n        while (chosen < 1 || chosen > this.hand.size()) {\n            System.out.print(\"Choose a card (1-\" + this.hand.size() + \"): \");\n            chosen = scanner.nextInt();\n        }\n\n        Cards chosenCard = this.hand.get(chosen- 1);\n        this.hand.remove(chosen - 1);\n        nbCards--;\n\n        // Retourne carte choisie\n        return chosenCard;\n    }\n\n\n    public void removeFromHand(Cards card) {\n        hand.remove(card);\n    }\n\n    public void setHand(List<Cards> hand) {\n        this.hand = hand;\n    }\n\n    public List<Cards> getHand() {\n        return hand;\n    }\n\n    public void addScore(int score) {\n        this.score += score;\n    }\n    public int getScore() {\n        return score;\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/sixquiprend/Modele/Player.java b/src/main/java/com/example/sixquiprend/Modele/Player.java
+--- a/src/main/java/com/example/sixquiprend/Modele/Player.java	(revision ee4de7170669ceb20e572d203b5c3caebbfb191f)
++++ b/src/main/java/com/example/sixquiprend/Modele/Player.java	(date 1685657874707)
+@@ -87,4 +87,4 @@
+     public int getScore() {
+         return score;
+     }
+-}
++}
+\ No newline at end of file
+Index: src/main/java/com/example/sixquiprend/Modele/Deck.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.sixquiprend.Modele;\n\nimport java.util.Collections;\nimport java.util.List;\nimport java.util.ArrayList;\nimport static com.example.sixquiprend.Modele.Cards.card2;\n\npublic class Deck {\n    private List<Cards> cards;\n    //supp\n    private List<Cards> card2;\n\n\n    public Deck(List<Cards> cards){\n        this.cards = cards;\n    }\n\n    public Deck() {\n        //2 lignes a supp\n        this.cards = Cards.cards;\n        this.card2 = Cards.card2();\n    }\n\n    // Méthode déjà faite par Java\n    public void shuffle() {\n        Collections.shuffle(cards);\n    }\n\n    public void distribute(List<Player> players) {\n        int nbPlayers = players.size();\n        int nbCardsPerPlayer = 10;\n        this.cards = Cards.card2();\n\n        for (Player player : players) {\n            List<Cards> playerCards = new ArrayList<>();\n\n            for (int j = 0; j < nbCardsPerPlayer; j++) {\n                if (!cards.isEmpty()) {\n                    shuffle();\n                    playerCards.add(cards.remove(0));\n                }\n            }\n            player.setHand(playerCards);\n            player.setNbCards(playerCards.size());\n        }\n    }\n    //distribue une carte du paquet au joueur, comme la pioche et l'enlève bien du paquet\n    public Cards drawCard() {\n        if (cards.isEmpty()) {\n            return null;\n        }\n\n        Cards drawnCard = cards.remove(0);\n        return drawnCard;\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/sixquiprend/Modele/Deck.java b/src/main/java/com/example/sixquiprend/Modele/Deck.java
+--- a/src/main/java/com/example/sixquiprend/Modele/Deck.java	(revision ee4de7170669ceb20e572d203b5c3caebbfb191f)
++++ b/src/main/java/com/example/sixquiprend/Modele/Deck.java	(date 1685657874712)
+@@ -53,4 +53,4 @@
+         Cards drawnCard = cards.remove(0);
+         return drawnCard;
+     }
+-}
++}
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"471e4523-89e7-4b0c-9ac2-5f215e9487e5\" name=\"Changes\" comment=\"distribuer/choisir carte\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Console/Main.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Console/Main.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Modele/GameLogic.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Modele/GameLogic.java\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"MavenImportPreferences\">\n    <option name=\"importingSettings\">\n      <MavenImportingSettings>\n        <option name=\"workspaceImportEnabled\" value=\"true\" />\n      </MavenImportingSettings>\n    </option>\n  </component>\n  <component name=\"ProjectId\" id=\"2QK3vBCdUxGhQ7CujAH5cPKBcUj\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\"><![CDATA[{\n  \"keyToString\": {\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\n    \"last_opened_file_path\": \"/Users/lorie/Downloads/SixQuiPrend-main\",\n    \"project.structure.last.edited\": \"Modules\",\n    \"project.structure.proportion\": \"0.15\",\n    \"project.structure.side.proportion\": \"0.2\",\n    \"settings.editor.selected.configurable\": \"reference.projectsettings.compiler.javacompiler\"\n  }\n}]]></component>\n  <component name=\"RecentsManager\">\n    <key name=\"CreateClassDialog.RecentsKey\">\n      <recent name=\"com.example.sixquiprend.Modele\" />\n    </key>\n    <key name=\"MoveClassesOrPackagesDialog.RECENTS_KEY\">\n      <recent name=\"com.example.sixquiprend\" />\n    </key>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"471e4523-89e7-4b0c-9ac2-5f215e9487e5\" name=\"Changes\" comment=\"\" />\n      <created>1684836434655</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1684836434655</updated>\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"interface\">\n      <created>1685293576946</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1685293576946</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"interface\">\n      <created>1685293863674</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1685293863674</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"interface\">\n      <created>1685311379437</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1685311379437</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"interface ranger\">\n      <created>1685543384292</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1685543384292</updated>\n    </task>\n    <task id=\"LOCAL-00005\" summary=\"interface ranger\">\n      <created>1685543432762</created>\n      <option name=\"number\" value=\"00005\" />\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1685543432762</updated>\n    </task>\n    <task id=\"LOCAL-00006\" summary=\"demander nom, message d'info\">\n      <created>1685551157886</created>\n      <option name=\"number\" value=\"00006\" />\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1685551157886</updated>\n    </task>\n    <task id=\"LOCAL-00007\" summary=\"demander nom, message d'info\">\n      <created>1685551167900</created>\n      <option name=\"number\" value=\"00007\" />\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1685551167900</updated>\n    </task>\n    <task id=\"LOCAL-00008\" summary=\"correction bug\">\n      <created>1685558047422</created>\n      <option name=\"number\" value=\"00008\" />\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1685558047422</updated>\n    </task>\n    <task id=\"LOCAL-00009\" summary=\"distribuer/choisir carte\">\n      <created>1685613669913</created>\n      <option name=\"number\" value=\"00009\" />\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1685613669913</updated>\n    </task>\n    <task id=\"LOCAL-00010\" summary=\"distribuer/choisir carte\">\n      <created>1685613901514</created>\n      <option name=\"number\" value=\"00010\" />\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1685613901514</updated>\n    </task>\n    <task id=\"LOCAL-00011\" summary=\"distribuer/choisir carte\">\n      <created>1685695331459</created>\n      <option name=\"number\" value=\"00011\" />\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1685695331459</updated>\n    </task>\n    <task id=\"LOCAL-00012\" summary=\"distribuer/choisir carte\">\n      <created>1685695446297</created>\n      <option name=\"number\" value=\"00012\" />\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1685695446297</updated>\n    </task>\n    <task id=\"LOCAL-00013\" summary=\"distribuer/choisir carte\">\n      <created>1685695454320</created>\n      <option name=\"number\" value=\"00013\" />\n      <option name=\"presentableId\" value=\"LOCAL-00013\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1685695454320</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"14\" />\n    <servers />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"interface\" />\n    <MESSAGE value=\"interface ranger\" />\n    <MESSAGE value=\"demander nom, message d'info\" />\n    <MESSAGE value=\"correction bug\" />\n    <MESSAGE value=\"GameLogic/board\" />\n    <MESSAGE value=\"distribuer/choisir carte\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"distribuer/choisir carte\" />\n  </component>\n  <component name=\"XSLT-Support.FileAssociations.UIState\">\n    <expand />\n    <select />\n  </component>\n  <component name=\"com.intellij.coverage.CoverageDataManagerImpl\">\n    <SUITE FILE_PATH=\"coverage/SixQuiPrend$Main.ic\" NAME=\"Main Coverage Results\" MODIFIED=\"1685690042143\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"idea\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\">\n      <FILTER>com.example.sixquiprend.Console.*</FILTER>\n    </SUITE>\n    <SUITE FILE_PATH=\"coverage/SixQuiPrend$Window.ic\" NAME=\"Window Coverage Results\" MODIFIED=\"1685582959383\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"idea\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\">\n      <FILTER>com.example.sixquiprend.Vue.Interface.*</FILTER>\n    </SUITE>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision ee4de7170669ceb20e572d203b5c3caebbfb191f)
++++ b/.idea/workspace.xml	(date 1685658452233)
+@@ -6,8 +6,13 @@
+   <component name="ChangeListManager">
+     <list default="true" id="471e4523-89e7-4b0c-9ac2-5f215e9487e5" name="Changes" comment="distribuer/choisir carte">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Console/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Console/Main.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Modele/GameLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Modele/GameLogic.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sixquiprend/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sixquiprend/HelloApplication.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Modele/Cards.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Modele/Cards.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Modele/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Modele/Deck.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Modele/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Modele/Player.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Vue/Interface/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Vue/Interface/MainController.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Vue/Interface/MainStage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Vue/Interface/MainStage.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Vue/Interface/PrimaryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Vue/Interface/PrimaryController.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -40,18 +45,18 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "RunOnceActivity.OpenProjectViewOnStart": "true",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+-    "last_opened_file_path": "/Users/lorie/Downloads/SixQuiPrend-main",
+-    "project.structure.last.edited": "Modules",
+-    "project.structure.proportion": "0.15",
+-    "project.structure.side.proportion": "0.2",
+-    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
++    &quot;last_opened_file_path&quot;: &quot;/Users/lorie/Downloads/SixQuiPrend-main&quot;,
++    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
++    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
++    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
++    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.javacompiler&quot;
+   }
+-}]]></component>
++}</component>
+   <component name="RecentsManager">
+     <key name="CreateClassDialog.RecentsKey">
+       <recent name="com.example.sixquiprend.Modele" />
+@@ -188,11 +193,11 @@
+     <select />
+   </component>
+   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+-    <SUITE FILE_PATH="coverage/SixQuiPrend$Main.ic" NAME="Main Coverage Results" MODIFIED="1685690042143" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+-      <FILTER>com.example.sixquiprend.Console.*</FILTER>
+-    </SUITE>
+     <SUITE FILE_PATH="coverage/SixQuiPrend$Window.ic" NAME="Window Coverage Results" MODIFIED="1685582959383" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+       <FILTER>com.example.sixquiprend.Vue.Interface.*</FILTER>
++    </SUITE>
++    <SUITE FILE_PATH="coverage/SixQuiPrend$Main.ic" NAME="Main Coverage Results" MODIFIED="1685690042143" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
++      <FILTER>com.example.sixquiprend.Console.*</FILTER>
+     </SUITE>
+   </component>
+ </project>
+\ No newline at end of file
