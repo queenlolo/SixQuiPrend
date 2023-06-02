@@ -7,13 +7,18 @@ import static com.example.sixquiprend.Modele.Cards.card2;
 
 public class Deck {
     private List<Cards> cards;
+    //supp
+    private List<Cards> card2;
+
 
     public Deck(List<Cards> cards){
         this.cards = cards;
     }
 
     public Deck() {
-        this.cards = Cards.card2();
+        //2 lignes a supp
+        this.cards = Cards.cards;
+        this.card2 = Cards.card2();
     }
 
     // Méthode déjà faite par Java
@@ -31,11 +36,21 @@ public class Deck {
 
             for (int j = 0; j < nbCardsPerPlayer; j++) {
                 if (!cards.isEmpty()) {
+                    shuffle();
                     playerCards.add(cards.remove(0));
                 }
             }
             player.setHand(playerCards);
             player.setNbCards(playerCards.size());
         }
+    }
+    //distribue une carte du paquet au joueur, comme la pioche et l'enlève bien du paquet
+    public Cards drawCard() {
+        if (cards.isEmpty()) {
+            return null;
+        }
+
+        Cards drawnCard = cards.remove(0);
+        return drawnCard;
     }
 }

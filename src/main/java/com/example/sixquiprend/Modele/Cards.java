@@ -10,11 +10,25 @@ public class Cards {
     private int nbBeefs;
     public static List<Cards> cards = new ArrayList<>();
     public static List<Cards> allCards = new ArrayList<>();
+    private List<Integer> card;
 
     public Cards(int value, int nbBeefs, String link) {
         this.value = value;
         this.nbBeefs = nbBeefs;
         this.link = "file:src/main/java/com/example/sixquiprend/Vue/ImageCards/" + link;
+        card = new ArrayList<>();
+        // Ajouter des éléments à la liste cards
+        card.add(1);
+        card.add(2);
+        card.add(3);
+        // ...
+    }
+    public List<Integer> getCard() {
+        return card;
+    }
+
+    public void setCard(List<Integer> card) {
+        this.card = card;
     }
 
     public static int beef(int numCard, int i) {
@@ -40,20 +54,21 @@ public class Cards {
         List<Cards> card2 = new ArrayList<>();
         // Initialiser les cartes avec les valeurs de 1 à 104
         for (int i = 1; i <= 104; i++) {
-            Cards card = new Cards(0, 0,i+".png");
-            card2.add(card);
-            // jsp pq il faut supprimer link pour qu'il n'y est plus d'erreur
-            cards.add(card);
-            allCards.add(card);
-            cards.get(i - 1).value = i;
-            allCards.get(i - 1).value = i;
-            beef(cards.get(i - 1).value, i);
-            beef(allCards.get(i - 1).value, i);
-
+            Cards newCard = new Cards(0, 0, i + ".png");
+            card2.add(newCard);
+            // jsp pq il faut supprimer link pour qu'il n'y ait plus d'erreur
+            cards.add(newCard);
+            allCards.add(newCard);
+            cards.get(i - 1).setValue(i);
+            allCards.get(i - 1).setValue(i);
+            beef(cards.get(i - 1).getValue(), i);
+            beef(allCards.get(i - 1).getValue(), i);
         }
 
         return card2;
     }
+
+
 
     public String toString() {
         return "Card [numCard=" + getValue() + ", nbBeefs=" + getNbBeefs() + ", link=" + getLink() + "]";

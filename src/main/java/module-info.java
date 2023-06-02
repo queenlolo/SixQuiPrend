@@ -2,6 +2,7 @@ module com.example.sixquiprend {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.desktop;
+    requires jdk.jdeps;
 
 
     opens com.example.sixquiprend to javafx.fxml;
