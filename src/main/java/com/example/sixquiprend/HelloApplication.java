@@ -23,7 +23,7 @@ public class HelloApplication extends Application {
         PrimaryStage primaryStage = new PrimaryStage();
         PrimaryController primaryController = new PrimaryController(primaryStage, this);
 
-        Scene scene = new Scene(primaryStage, 920, 700);
+        Scene scene = new Scene(primaryStage, 920, 1000);
         stage.setTitle("6 Qui Prend");
         stage.setScene(scene);
         stage.show();
@@ -33,7 +33,7 @@ public class HelloApplication extends Application {
         MainStage mainStage = new MainStage();
         MainController mainController = new MainController(mainStage);
 
-        Scene scene = new Scene(mainStage, 920, 700);
+        Scene scene = new Scene(mainStage, 920, 1000);
         stage.setTitle("6 Qui Prend");
         stage.setScene(scene);
         stage.show();

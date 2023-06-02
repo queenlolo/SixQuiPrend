@@ -2,6 +2,7 @@ package com.example.sixquiprend.Vue.Interface;
 
 import com.example.sixquiprend.Modele.*;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -24,7 +25,7 @@ public class MainStage extends StackPane {
 
         MainController.askName();
 
-        vBox.setSpacing(400);
+        vBox.setSpacing(530);
 
         List<Cards> cards = Cards.card2();
         Deck deck = new Deck(cards);
@@ -39,16 +40,16 @@ public class MainStage extends StackPane {
         FlowPane cardsContainer2 = new FlowPane();
 
         cardsContainer.setPrefWidth(920);
-        cardsContainer.setPrefHeight(200);
+        cardsContainer.setPrefHeight(100);
         cardsContainer.setHgap(0);
         cardsContainer.setVgap(0);
-        cardsContainer.setPadding(new Insets(0));
+        cardsContainer.setAlignment(Pos.CENTER);
 
         cardsContainer2.setPrefWidth(920);
-        cardsContainer2.setPrefHeight(200);
+        cardsContainer2.setPrefHeight(100);
         cardsContainer2.setHgap(0);
         cardsContainer2.setVgap(0);
-        cardsContainer2.setPadding(new Insets(0));
+        cardsContainer2.setAlignment(Pos.CENTER);
 
         Player player1 = players.get(0);
         Player player2 = players.get(1);
@@ -58,7 +59,7 @@ public class MainStage extends StackPane {
             Image newImage = MainController.cropImage(image, 180, 180);
             ImageView imageView = new ImageView(newImage);
             imageView.setFitWidth(90);
-            imageView.setFitHeight(170);
+            imageView.setFitHeight(140);
 
             cardsContainer.getChildren().add(imageView);
         }
@@ -68,7 +69,7 @@ public class MainStage extends StackPane {
             Image newImage = MainController.cropImage(image, 180, 180);
             ImageView imageView = new ImageView(newImage);
             imageView.setFitWidth(90);
-            imageView.setFitHeight(170);
+            imageView.setFitHeight(140);
 
             cardsContainer2.getChildren().add(imageView);
         }
