@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="471e4523-89e7-4b0c-9ac2-5f215e9487e5" name="Changes" comment="carte piles">
+    <list default="true" id="471e4523-89e7-4b0c-9ac2-5f215e9487e5" name="Changes" comment="correction bug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Modele/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Modele/Deck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Vue/Interface/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Vue/Interface/MainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Vue/Interface/MainStage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sixquiprend/Vue/Interface/MainStage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -188,7 +188,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685692575953</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="correction bug">
+      <created>1685693624402</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1685693624402</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -206,12 +213,12 @@
     <MESSAGE value="interface" />
     <MESSAGE value="interface ranger" />
     <MESSAGE value="demander nom, message d'info" />
-    <MESSAGE value="correction bug" />
     <MESSAGE value="GameLogic/board" />
     <MESSAGE value="distribuer/choisir carte" />
     <MESSAGE value="afficher carte" />
     <MESSAGE value="carte piles" />
-    <option name="LAST_COMMIT_MESSAGE" value="carte piles" />
+    <MESSAGE value="correction bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="correction bug" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

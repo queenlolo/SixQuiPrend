@@ -12,6 +12,7 @@ import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MainStage extends StackPane {
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -54,14 +55,17 @@ public class MainStage extends StackPane {
         Player player1 = players.get(0);
         Player player2 = players.get(1);
 
+        List<Cards> drawnCards = deck.drawRandomCards(4);
+
         for (Cards card : player1.getHand()) {
             Image image = new Image(card.getLink());
             Image newImage = MainController.cropImage(image, 180, 180);
             ImageView imageView = new ImageView(newImage);
             imageView.setFitWidth(90);
             imageView.setFitHeight(140);
-
+            MainController.changeCardPosition(imageView);
             cardsContainer.getChildren().add(imageView);
+
         }
 
         for (Cards card : player2.getHand()) {
@@ -73,6 +77,7 @@ public class MainStage extends StackPane {
 
             cardsContainer2.getChildren().add(imageView);
         }
+        
 
         hBox.getChildren().add(cardsContainer);
         hBox2.getChildren().add(cardsContainer2);
@@ -93,7 +98,6 @@ public class MainStage extends StackPane {
                 gridPane.add(card, col, row);
             }
         }
-        List<Cards> drawnCards = deck.drawRandomCards(4);
 
         for (int row = 0; row < numRows; row++) {
                 Cards card = drawnCards.get(row);
@@ -105,6 +109,7 @@ public class MainStage extends StackPane {
 
                 gridPane.add(imageView, 0, row);
             }
+        
         vBox.getChildren().addAll(hBox2,gridPane, hBox);
 
 

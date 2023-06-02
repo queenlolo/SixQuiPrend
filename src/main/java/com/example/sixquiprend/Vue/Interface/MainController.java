@@ -5,6 +5,9 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
+import javafx.scene.image.ImageView;
+
+import java.util.List;
 
 public class MainController {
 
@@ -44,5 +47,20 @@ public class MainController {
 
         return croppedImage;
     }
+
+    public static void changeCardPosition(ImageView imageView) {
+
+        imageView.setOnMouseClicked(event -> {
+            double currentTranslateY = imageView.getTranslateY();
+            double newTranslateY = currentTranslateY - 30;
+
+            imageView.setTranslateY(newTranslateY);
+            imageView.setOnMouseClicked(null);
+
+        });
+    }
+
+
+
 
 }
