@@ -6,6 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 
 import java.util.List;
 
@@ -56,6 +57,22 @@ public class MainController {
 
             imageView.setTranslateY(newTranslateY);
             imageView.setOnMouseClicked(null);
+
+        });
+    }
+
+    public void moveCardPosition(ImageView card, int targetColumn, int targetRow) {
+        card.setOnMouseClicked(event -> {
+            GridPane gridPane = (GridPane) card.getParent(); // Obtenir le GridPane parent
+            int currentColumn = GridPane.getColumnIndex(card); // Obtenir l'index de colonne actuel
+            int currentRow = GridPane.getRowIndex(card); // Obtenir l'index de ligne actuel
+
+            // Supprimer la carte de sa position actuelle
+            gridPane.getChildren().remove(card);
+
+            // Ajouter la carte à la position cible
+            gridPane.add(card, targetColumn, targetRow);
+
 
         });
     }
