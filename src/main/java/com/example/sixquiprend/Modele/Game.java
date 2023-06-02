@@ -60,20 +60,17 @@ public class Game {
 
     }
 
-    public void Player(){
-        //public static void main(String[] args) {
-
-            Player joueur1 = new Player("Joueur 1");
-            Player joueur2 = new Player("Joueur 2");
+    public static void Player(){
+        Player joueur1 = new Player("Joueur 1");
+        Player joueur2 = new Player("Joueur 2");
 
 
-            // Création d'une liste de joueurs
-            List<Player> joueurs = new ArrayList<>();
-            joueurs.add(joueur1);
-            joueurs.add(joueur2);
+        // Création d'une liste de joueurs
+        List<Player> joueurs = new ArrayList<>();
+        joueurs.add(joueur1);
+        joueurs.add(joueur2);
 
-            System.out.println(joueur1.getName());
-            System.out.println(joueur2.getName());
-        //}
+        System.out.println(joueur1.getName());
+        System.out.println(joueur2.getName());
+        }
     }
-}

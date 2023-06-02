@@ -55,6 +55,8 @@ public class Board {
         }
     }
 
+    
+
     private int findBestRow(Cards card) {
         int bestRow = 0;
         int minDiff = Integer.MAX_VALUE;
