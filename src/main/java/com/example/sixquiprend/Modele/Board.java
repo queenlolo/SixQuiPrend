@@ -25,9 +25,9 @@ public class Board {
 
     public void addCard(Cards card) {
         //cherche la carte à l'endroit le plus stratégique
-        //int row = findBestRow(card);
+        int row = findBestRow(card);
         //ajoute la carte
-        //rows.get(row).add(card);
+        rows.get(row).add(card);
         if (card != null) {
             this.card.addAll(card.getCard());
         }
@@ -44,9 +44,12 @@ public class Board {
 
     public Cards takeBeefCard() {
         List<Cards> lastRow = rows.get(rows.size() - 1);
-        Cards bullCard = lastRow.get(lastRow.size() - 1);
-        lastRow.remove(bullCard);
-        return bullCard;
+        if (!lastRow.isEmpty()) {
+            Cards beefCard = lastRow.get(lastRow.size() - 1);
+            lastRow.remove(beefCard);
+            return beefCard;
+        }
+        return null; // ou une autre valeur par défaut si la liste est vide
     }
 
     public void reset() {
@@ -55,7 +58,7 @@ public class Board {
         }
     }
 
-    private int findBestRow(Cards card) {
+    public int findBestRow(Cards card) {
         int bestRow = 0;
         int minDiff = Integer.MAX_VALUE;
 

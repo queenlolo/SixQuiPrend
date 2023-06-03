@@ -84,6 +84,10 @@ public class Cards {
     public String getLink() {
         return link;
     }
+    @Override
+    public String toString() {
+        return value + " (" + nbBeefs + " Tête de Boeufs)";
+    }
 
     // Affichage
     public void afficher() {

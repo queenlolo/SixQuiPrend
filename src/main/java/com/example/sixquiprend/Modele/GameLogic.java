@@ -1,23 +1,20 @@
 package com.example.sixquiprend.Modele;
 
-import com.example.sixquiprend.Modele.Board;
-import com.example.sixquiprend.Modele.Cards;
-import com.example.sixquiprend.Modele.Deck;
-import com.example.sixquiprend.Modele.Player;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class GameLogic {
-    private List<Player> players;
-    private List<List<Cards>> playerHands;
-    private List<List<Cards>> playerPiles;
-    private Deck deck;
-    private Board board;
-    private int score;
+    public List<Player> players;
+    public List<List<Cards>> playerHands;
+    public List<List<Cards>> playerPiles;
+    public Deck deck;
+    public Board board;
+    public int score;
 
     public GameLogic(int numPlayers) {
         players = new ArrayList<>();
+        //peut etre ajouter dans player
         playerHands = new ArrayList<>();
         playerPiles = new ArrayList<>();
         deck = new Deck();
@@ -34,68 +31,74 @@ public class GameLogic {
 
     public void playGame() {
         initializeGame();
-        while (!isGameOver()) {
+        for (int round = 1; round <= 5; round++) {
+            System.out.println("=== Round " + round + " ===");
             playRound();
             updateScore();
-            resetRound();
         }
+        resetRound();
 
         displayGameResults();
     }
 
-    private void initializeGame() {
+    public void initializeGame() {
         deck.shuffle();
-        deck.distribute( players);
+        deck.distribute(players);
         board.reset();
         clearPlayerPiles();
     }
 
-
-
-
-    private void clearPlayerPiles() {
+    public void clearPlayerPiles() {
         for (List<Cards> pile : playerPiles) {
             pile.clear();
         }
     }
 
-    private void playRound() {
+    public void playRound() {
         for (int i = 0; i < players.size(); i++) {
             Player player = players.get(i);
             List<Cards> hand = playerHands.get(i);
             List<Cards> pile = playerPiles.get(i);
 
+            System.out.println("Current board: " + board);
+
+            System.out.println("Player " + player.getName() + ", choose a card:");
+            //player.displayPlayerHand();
+
             Cards chosenCard = player.chooseCard(hand);
             board.addCard(chosenCard);
-            hand.remove(chosenCard);
+
 
             if (board.isFull()) {
-                Cards bullCard = board.takeBeefCard();
-                pile.add(bullCard);
+                Cards beefCard = board.takeBeefCard();
+                pile.add(beefCard);
+                System.out.println("Beef card taken: " + beefCard);
             }
         }
+        updateScore();
     }
-
-    private void updateScore() {
-        for (int i = 0; i < players.size(); i++) {
-            Player player = players.get(i);
-            List<Cards> pile = playerPiles.get(i);
-            int score = calculateScore(pile);
-            player.addScore(score);
-        }
-    }
-
-    private int calculateScore(List<Cards> pile) {
+    public int calculateScore(List<Cards> pile) {
         int totalNbBeefs = 0;
         for (Cards card : pile) {
             totalNbBeefs += card.getNbBeefs();
         }
         score += totalNbBeefs;
-        return score;
+        return totalNbBeefs;
+    }
+
+    public void updateScore() {
+        for (int i = 0; i < players.size(); i++) {
+            Player player = players.get(i);
+            List<Cards> pile = playerPiles.get(i);
+            int playerScore = calculateScore(pile);
+            score += playerScore;
+            player.addScore(playerScore);
+        }
     }
 
 
-    private void resetRound() {
+
+    public void resetRound() {
         board.reset();
         clearPlayerPiles();
     }
@@ -106,19 +109,19 @@ public class GameLogic {
                 return false;
             }
         }
+
+        for (List<Cards> pile : playerPiles) {
+            if (!pile.isEmpty()) {
+                return false;
+            }
+        }
+
         return true;
     }
 
-    private void displayGameResults() {
-        List<Integer> scores = new ArrayList<>();
-
+    public void displayGameResults() {
         for (Player player : players) {
-            int score = player.getScore();
-            scores.add(score);
-            System.out.println("Score of the player " + player.getName() + ": " + score);
+            System.out.println("Score of " + player.getName() + ": " + player.getScore());
         }
-
-        System.out.println("The player with the lowest score wins. :");
-        int smallestScore = scores.stream().min(Integer::compare).orElse(0);
     }
 }
