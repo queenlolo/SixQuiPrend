@@ -1,5 +1,6 @@
 package com.example.sixquiprend.Vue.Interface;
 
+import com.example.sixquiprend.Modele.Player;
 import javafx.application.Platform;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
@@ -7,7 +8,9 @@ import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import com.example.sixquiprend.Modele.Cards;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainController {
@@ -62,28 +65,17 @@ public class MainController {
         });
     }
 
-    public void moveCardPosition(ImageView card, int targetColumn, int targetRow) {
-        card.setOnMouseClicked(event -> {
-            GridPane gridPane = (GridPane) card.getParent(); // Obtenir le GridPane parent
-            int currentColumn = GridPane.getColumnIndex(card); // Obtenir l'index de colonne actuel
-            int currentRow = GridPane.getRowIndex(card); // Obtenir l'index de ligne actuel
+    public static void chooseCard(ImageView imageView, int cardIndex){
+        imageView.setOnMouseClicked(event -> {
+            double currentTranslateY = imageView.getTranslateY();
+            double newTranslateY = currentTranslateY - 30;
 
-            // Supprimer la carte de sa position actuelle
-            gridPane.getChildren().remove(card);
+            imageView.setTranslateY(newTranslateY);
+            imageView.setOnMouseClicked(null);
 
-            // Ajouter la carte à la position cible
-            gridPane.add(card, targetColumn, targetRow);
 
-            // Ajuster les propriétés translateX et translateY de la carte pour réinitialiser les transformations précédentes
-            card.setTranslateX(0);
-            card.setTranslateY(0);
-
-            // Mettre à jour les propriétés d'index de colonne et de ligne
-            GridPane.setColumnIndex(card, targetColumn);
-            GridPane.setRowIndex(card, targetRow);
         });
     }
-
 
 
 
