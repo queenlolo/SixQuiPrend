@@ -329,6 +329,7 @@ public class MainStage extends StackPane {
         return null;
     }
 
+
     private class Pile {
         private List<Cards> cards;
 
