@@ -147,10 +147,9 @@ public class MainStage extends StackPane {
                             currentContainer.getChildren().remove(imageView);
                             currentPlayer.getHand().remove(card);
                             cardsToPlace.add(card);
-                            currentPlayerIndex++; // Passer au joueur suivant
-                            nextPlayerChooseCard(); // Appeler récursivement pour le joueur suivant
+                            currentPlayerIndex++;
+                            nextPlayerChooseCard();
                         } catch (Exception exception) {
-                            // Gérer les exceptions ici
                         }
                     });
                 }
@@ -167,7 +166,7 @@ public class MainStage extends StackPane {
                 System.out.println("All players have chosen a card.");
                 System.out.println("Cards to place: " + cardsToPlace);
                 placeCards(gridPane);
-                // Tous les joueurs ont choisi une carte
+                cardsToPlace.clear();
 
             } else {
                 System.out.println("Not all players have chosen a card yet.");
@@ -177,34 +176,39 @@ public class MainStage extends StackPane {
 
     private void placeCards(GridPane gridPane) {
         int numRows = 4;
+        int numColumns = 5;
         int currentCol = 0;
+        int currentRow = 0;
 
         for (Cards cardsToPlace : cardsToPlace) {
+            int bestRow = -1;
             int bestCol = -1;
             int differenceMin = Integer.MAX_VALUE;
+            List<Cards> middleCards = new ArrayList<>(drawnCards);
 
             for (int row = 0; row < numRows; row++) {
-                Cards middleCards = drawnCards.get(row);
-
-                if (cardsToPlace.getValue() > middleCards.getValue()) {
-                    for (int col = currentCol; col < gridPane.getColumnConstraints().size(); col++) {
-                        boolean colonneVide = true;
+                if (cardsToPlace.getValue() > middleCards.get(row).getValue()) {
+                    for (int col = 0; col < numColumns; col++) {
+                        boolean positionEmpty = true;
 
                         for (Node node : gridPane.getChildren()) {
-                            Integer nodeColonne = GridPane.getColumnIndex(node);
-                            Integer nodeLigne = GridPane.getRowIndex(node);
+                            if (node instanceof ImageView) {
+                                Integer nodeCol = GridPane.getColumnIndex(node);
+                                Integer nodeRow = GridPane.getRowIndex(node);
 
-                            if (nodeColonne != null && nodeLigne != null && nodeColonne == col && nodeLigne == row) {
-                                colonneVide = false;
-                                break;
+                                if (nodeCol != null && nodeRow != null && nodeCol == col && nodeRow == row) {
+                                    positionEmpty = false;
+                                    break;
+                                }
                             }
                         }
 
-                        if (colonneVide) {
-                            int difference = cardsToPlace.getValue() - middleCards.getValue();
+                        if (positionEmpty) {
+                            int difference = cardsToPlace.getValue() - middleCards.get(row).getValue();
 
                             if (difference < differenceMin) {
                                 differenceMin = difference;
+                                bestRow = row;
                                 bestCol = col;
                             }
                         }
@@ -212,25 +216,31 @@ public class MainStage extends StackPane {
                 }
             }
 
-            // Si aucune colonne cible n'a été trouvée, placer la carte dans la colonne courante
-            if (bestCol == -1) {
+            if (bestRow == -1 || bestCol == -1) {
+                bestRow = currentRow;
                 bestCol = currentCol;
             }
 
+            middleCards.set(bestRow, cardsToPlace);
+            System.out.println(middleCards);
+
             Image imageCardsToPlace = new Image(cardsToPlace.getLink());
-            Image nouvelleImageCarteAPlacer = MainController.cropImage(imageCardsToPlace, 180, 180);
-            ImageView imageViewCardsToPlace = new ImageView(nouvelleImageCarteAPlacer);
+            Image newImageCardToPlace = MainController.cropImage(imageCardsToPlace, 180, 180);
+            ImageView imageViewCardsToPlace = new ImageView(newImageCardToPlace);
             imageViewCardsToPlace.setFitWidth(90);
             imageViewCardsToPlace.setFitHeight(140);
 
-            gridPane.add(imageViewCardsToPlace, bestCol + 1, numRows - 1);
+            gridPane.add(imageViewCardsToPlace, bestCol, bestRow);
 
-            // Mettre à jour la colonne courante pour la prochaine carte
             currentCol = bestCol + 1;
+            currentRow = bestRow;
+
+            drawnCards = new ArrayList<>(middleCards);
         }
 
         checkColumns(gridPane);
     }
+
 
     //verifie quand une colonne est pleine
     private void checkColumns(GridPane gridPane) {
