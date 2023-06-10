@@ -72,6 +72,9 @@ public class Player {
     public void removeFromHand(Cards card) {
         hand.remove(card);
     }
+    public void reset() {
+        hand.clear();
+    }
 
     public void setHand(List<Cards> hand) {
         this.hand = hand;

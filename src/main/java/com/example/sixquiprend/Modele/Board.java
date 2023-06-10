@@ -12,7 +12,7 @@ public class Board {
     private List<Integer> card;
 
 
-    private List<List<Cards>> rows;
+    private static List<List<Cards>> rows;
 
     public Board() {
         card = new ArrayList<>();
@@ -58,7 +58,7 @@ public class Board {
         }
     }
 
-    public int findBestRow(Cards card) {
+    public static int findBestRow(Cards card) {
         int bestRow = 0;
         int minDiff = Integer.MAX_VALUE;
 
