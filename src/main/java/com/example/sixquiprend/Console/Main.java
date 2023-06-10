@@ -14,7 +14,7 @@ public class Main {
         int numPlayers = 2;
         GameLogic game = new GameLogic(numPlayers);
         game.playGame();
-        Cards.card2(); // Appel de la méthode card2() pour initialiser les cartes
+        Cards.card2();
         Cards cards = new Cards(10, 5, "example.png");
 
     }

@@ -9,7 +9,7 @@ public class Cards {
     private int value;
     private int nbBeefs;
     public static List<Cards> cards = new ArrayList<>();
-    public static List<Cards> allCards = new ArrayList<>();
+    //public static List<Cards> allCards = new ArrayList<>();
     private List<Integer> card;
 
     public Cards(int value, int nbBeefs, String link) {
@@ -52,12 +52,12 @@ public class Cards {
 
     public static List<Cards> card2() {
         List<Cards> card2 = new ArrayList<>();
-        // Initialiser les cartes avec les valeurs de 1 à 104
+        // Initialiser  cartes avec  valeurs de 1 à 104
         for (int i = 1; i <= 104; i++) {
     Cards card = new Cards(i, 0, i + ".png");
     card2.add(card);
     cards.add(card);
-    allCards.add(card);
+    //allCards.add(card);
     card.setNbBeefs(beef(card.getValue(), i));
     }
 

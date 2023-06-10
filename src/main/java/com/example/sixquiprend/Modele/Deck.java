@@ -28,6 +28,7 @@ public class Deck {
         Collections.shuffle(cards);
     }
 
+
     public void distribute(List<Player> players) {
         int nbPlayers = players.size();
         int nbCardsPerPlayer = 10;
