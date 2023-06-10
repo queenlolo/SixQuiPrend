@@ -1,17 +1,12 @@
 package com.example.sixquiprend.Vue.Interface;
 
-import com.example.sixquiprend.Modele.Player;
 import javafx.application.Platform;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
-import com.example.sixquiprend.Modele.Cards;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainController {
 
@@ -64,19 +59,6 @@ public class MainController {
 
         });
     }
-
-    public static void chooseCard(ImageView imageView, int cardIndex){
-        imageView.setOnMouseClicked(event -> {
-            double currentTranslateY = imageView.getTranslateY();
-            double newTranslateY = currentTranslateY - 30;
-
-            imageView.setTranslateY(newTranslateY);
-            imageView.setOnMouseClicked(null);
-
-
-        });
-    }
-
 
 
 }

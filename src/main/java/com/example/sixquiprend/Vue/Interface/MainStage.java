@@ -1,13 +1,13 @@
 package com.example.sixquiprend.Vue.Interface;
 
 import com.example.sixquiprend.Modele.*;
-import com.example.sixquiprend.Vue.Interface.MainController;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -35,7 +35,7 @@ public class MainStage extends StackPane {
     public MainStage() {
         alert.setTitle("Information message");
         alert.setHeaderText(null);
-        alert.setContentText("Welcome to our 6 qui prend\n\n\n" + "Lorlay, Massil, Lorie");
+        alert.setContentText("Welcome to our 6 qui prend\n\n\n" + "Lorlay, Lorie");
         alert.showAndWait();
 
         MainController.askName();
@@ -45,7 +45,7 @@ public class MainStage extends StackPane {
 
         players = new ArrayList<>();
         players.add(new Player("Player 1"));
-        players.add(new Player("Player 2"));
+        players.add(new AI("AI", players));
 
         deck.distribute(players);
 
@@ -136,22 +136,35 @@ public class MainStage extends StackPane {
             FlowPane currentContainer = currentPlayerIndex == 0 ? cardsContainer : cardsContainer2;
 
             if (!currentPlayer.getHand().isEmpty()) {
-                for (int i = 0; i < currentContainer.getChildren().size(); i++) {
-                    ImageView imageView = (ImageView) currentContainer.getChildren().get(i);
-                    Cards card = currentPlayer.getHand().get(i);
+                if (currentPlayer instanceof AI) {
+                    AI aiPlayer = (AI) currentPlayer;
+                    Cards selectedCard = aiPlayer.playRandomCard();
+                    cardsToPlace.add(selectedCard);
+                    currentPlayerIndex++;
+                    nextPlayerChooseCard();
+                } else {
+                    for (int i = 0; i < currentContainer.getChildren().size(); i++) {
+                        ImageView imageView = (ImageView) currentContainer.getChildren().get(i);
+                        Cards card = currentPlayer.getHand().get(i);
 
-                    imageView.setOnMouseClicked(event -> {
-                        try {
-                            int cardValue = card.getValue();
-                            System.out.println("Value of clicked card: " + cardValue);
-                            currentContainer.getChildren().remove(imageView);
-                            currentPlayer.getHand().remove(card);
-                            cardsToPlace.add(card);
-                            currentPlayerIndex++;
-                            nextPlayerChooseCard();
-                        } catch (Exception exception) {
-                        }
-                    });
+                        imageView.setOnMouseClicked(event -> {
+                            if (event.getButton() == MouseButton.PRIMARY) {
+                                if (imageView.getTranslateY() == 0) {
+                                    double currentTranslateY = imageView.getTranslateY();
+                                    double newTranslateY = currentTranslateY - 30;
+                                    imageView.setTranslateY(newTranslateY);
+                                } else {
+                                    int cardValue = card.getValue();
+                                    System.out.println("Valeur de la carte cliquée : " + cardValue);
+                                    currentContainer.getChildren().remove(imageView);
+                                    currentPlayer.getHand().remove(card);
+                                    cardsToPlace.add(card);
+                                    currentPlayerIndex++;
+                                    nextPlayerChooseCard();
+                                }
+                            }
+                        });
+                    }
                 }
             } else {
                 currentPlayerIndex++; // Passer au joueur suivant
@@ -173,6 +186,9 @@ public class MainStage extends StackPane {
             }
         }
     }
+
+
+
 
     private void placeCards(GridPane gridPane) {
         int numRows = 4;

@@ -1,7 +1,6 @@
 package com.example.sixquiprend.Vue.Interface;
 
 import com.example.sixquiprend.HelloApplication;
-import com.example.sixquiprend.Modele.GameLogic;
 import javafx.event.ActionEvent;
 
 public class PrimaryController {
