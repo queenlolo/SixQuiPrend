@@ -12,7 +12,7 @@ public class Board {
     private List<Integer> card;
 
 
-    private static List<List<Cards>> rows;
+    public static List<List<Cards>> rows;
 
     public Board() {
         card = new ArrayList<>();

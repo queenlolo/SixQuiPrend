@@ -1,7 +1,8 @@
 package com.example.sixquiprend.Vue.Interface;
 
 import com.example.sixquiprend.Modele.*;
-
+import com.example.sixquiprend.Vue.Interface.MainController;
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
@@ -14,7 +15,6 @@ import javafx.scene.shape.Rectangle;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.Flow;
 
 public class MainStage extends StackPane {
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -24,13 +24,13 @@ public class MainStage extends StackPane {
     private FlowPane cardsContainer;
     private FlowPane cardsContainer2;
 
-
     private List<Player> players;
     private int currentPlayerIndex = 0;
 
     private List<Cards> drawnCards;
     private List<Cards> cardsToPlace;
     private GridPane gridPane;
+    private List<Pile> piles = new ArrayList<>();
 
     public MainStage() {
         alert.setTitle("Information message");
@@ -140,20 +140,21 @@ public class MainStage extends StackPane {
                     ImageView imageView = (ImageView) currentContainer.getChildren().get(i);
                     Cards card = currentPlayer.getHand().get(i);
 
-                imageView.setOnMouseClicked(event -> {
-                    try {
-                        int cardValue = card.getValue();
-                        System.out.println("Value of clicked card: " + cardValue);
-                        currentContainer.getChildren().remove(imageView);
-                        currentPlayer.getHand().remove(card);
-                        cardsToPlace.add(card);
-                        currentPlayerIndex++; // Passer au joueur suivant
-                        nextPlayerChooseCard(); // Appeler récursivement pour le joueur suivant
-                    } catch (Exception exception) {
-                        // Gérer les exceptions ici
-                    }
-                });
-            } }else {
+                    imageView.setOnMouseClicked(event -> {
+                        try {
+                            int cardValue = card.getValue();
+                            System.out.println("Value of clicked card: " + cardValue);
+                            currentContainer.getChildren().remove(imageView);
+                            currentPlayer.getHand().remove(card);
+                            cardsToPlace.add(card);
+                            currentPlayerIndex++; // Passer au joueur suivant
+                            nextPlayerChooseCard(); // Appeler récursivement pour le joueur suivant
+                        } catch (Exception exception) {
+                            // Gérer les exceptions ici
+                        }
+                    });
+                }
+            } else {
                 currentPlayerIndex++; // Passer au joueur suivant
                 nextPlayerChooseCard();
             }
@@ -173,6 +174,7 @@ public class MainStage extends StackPane {
             }
         }
     }
+
     private void placeCards(GridPane gridPane) {
         int numRows = 4;
         int currentCol = 0;
@@ -221,14 +223,115 @@ public class MainStage extends StackPane {
             imageViewCardsToPlace.setFitWidth(90);
             imageViewCardsToPlace.setFitHeight(140);
 
-            gridPane.add(imageViewCardsToPlace, bestCol+1, numRows - 1);
+            gridPane.add(imageViewCardsToPlace, bestCol + 1, numRows - 1);
 
             // Mettre à jour la colonne courante pour la prochaine carte
             currentCol = bestCol + 1;
         }
+
+        checkColumns(gridPane);
+    }
+
+    //verifie quand une colonne est pleine
+    private void checkColumns(GridPane gridPane) {
+        int numRows = 4;
+        int numColumns = 5;
+
+        for (int col = 0; col < numColumns; col++) {
+            boolean isColumnFull = true;
+
+            for (int row = 0; row < numRows; row++) {
+                Node node = getNodeByRowColumnIndex(row, col, gridPane);
+
+                if (node == null || node instanceof Rectangle) {
+                    isColumnFull = false;
+                    break;
+                }
+            }
+
+            if (isColumnFull) {
+                collectCards(col, gridPane);
+            }
+        }
+    }
+// recherche une carte spécifique dans un GridPane en utilisant ses coordonnées de ligne et de colonne.
+    private Node getNodeByRowColumnIndex(final int row, final int column, GridPane gridPane) {
+        Node result = null;
+
+        ObservableList<Node> children = gridPane.getChildren();
+
+        for (Node node : children) {
+            Integer rowIndex = GridPane.getRowIndex(node);
+            Integer columnIndex = GridPane.getColumnIndex(node);
+
+            if (rowIndex != null && columnIndex != null && rowIndex == row && columnIndex == column) {
+                result = node;
+                break;
+            }
+        }
+
+        return result;
+    }
+//quand colonne pleine on collecte les cartes
+    private void collectCards(int column, GridPane gridPane) {
+        ObservableList<Node> children = gridPane.getChildren();
+
+        for (int row = 0; row < gridPane.getRowConstraints().size() - 1; row++) {
+            Node node = getNodeByRowColumnIndex(row, column, gridPane);
+
+            if (node != null) {
+                gridPane.getChildren().remove(node);
+            }
+        }
+
+
+        System.out.println("Cards in column " + column + " have been collected.");
+    }
+
+    private void collectCardsToPile(List<Cards> collectedCards) {
+        Pile pile = new Pile(collectedCards);
+        piles.add(pile);
+
+        System.out.println("Cards collected: " + collectedCards);
+    }
+
+    // identifier  cartes sélectionnées par  joueurs  et pour obtenir l'URL de l'image associée donc pour getNodeByRowColumnIndex
+    private Cards findCardByImage(Node node) {
+        for (Cards card : cardsToPlace) {
+            if (card.getLink().equals(getImageSource(node))) {
+                return card;
+            }
+        }
+
+        return null;
+    }
+
+    private String getImageSource(Node node) {
+        if (node instanceof ImageView) {
+            ImageView imageView = (ImageView) node;
+            Image image = imageView.getImage();
+
+            if (image != null) {
+                return image.getUrl();
+            }
+        }
+
+        return null;
+    }
+
+    private class Pile {
+        private List<Cards> cards;
+
+        public Pile(List<Cards> cards) {
+            this.cards = cards;
+        }
+
+        public List<Cards> getCards() {
+            return cards;
+        }
     }
 
 
-
-
 }
+
+

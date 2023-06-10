@@ -40,7 +40,7 @@ public class MainController {
         System.exit(0);
     }
 
-    static Image cropImage(Image image, int cropLeft, int cropRight) {
+    public static Image cropImage(Image image, int cropLeft, int cropRight) {
         int originalWidth = (int) image.getWidth();
         int originalHeight = (int) image.getHeight();
         int cropX = cropLeft;
