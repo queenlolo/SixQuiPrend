@@ -36,7 +36,7 @@ public class MainStage extends StackPane {
     public MainStage() {
         alert.setTitle("Information message");
         alert.setHeaderText(null);
-        alert.setContentText("Welcome to our 6 qui prend\n\n\n" + "Lorlay, Lorie");
+        alert.setContentText("Welcome to our 6 qui prend\n\n\n" + "Lorlay, Lorie, Massil");
         alert.showAndWait();
 
         MainController.askName();
