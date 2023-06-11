@@ -47,6 +47,7 @@ public class MainStage extends StackPane {
         players.add(new Player("Player 1"));
         players.add(new AI("AI", players));
 
+
         deck.distribute(players);
 
         cardsContainer = new FlowPane();
@@ -137,9 +138,11 @@ public class MainStage extends StackPane {
 
             if (!currentPlayer.getHand().isEmpty()) {
                 if (currentPlayer instanceof AI) {
+                    ImageView imageView = (ImageView) currentContainer.getChildren().get(1);
                     AI aiPlayer = (AI) currentPlayer;
                     Cards selectedCard = aiPlayer.playRandomCard();
                     cardsToPlace.add(selectedCard);
+                    currentContainer.getChildren().remove(imageView);
                     currentPlayerIndex++;
                     nextPlayerChooseCard();
                 } else {
@@ -155,7 +158,7 @@ public class MainStage extends StackPane {
                                     imageView.setTranslateY(newTranslateY);
                                 } else {
                                     int cardValue = card.getValue();
-                                    System.out.println("Valeur de la carte cliquée : " + cardValue);
+                                    System.out.println("Value of clicked card: " + cardValue);
                                     currentContainer.getChildren().remove(imageView);
                                     currentPlayer.getHand().remove(card);
                                     cardsToPlace.add(card);
@@ -180,12 +183,12 @@ public class MainStage extends StackPane {
                 System.out.println("Cards to place: " + cardsToPlace);
                 placeCards(gridPane);
                 cardsToPlace.clear();
-
             } else {
                 System.out.println("Not all players have chosen a card yet.");
             }
         }
     }
+
 
 
 
