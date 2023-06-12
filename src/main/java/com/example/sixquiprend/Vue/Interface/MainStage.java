@@ -1,13 +1,13 @@
 package com.example.sixquiprend.Vue.Interface;
 
 import com.example.sixquiprend.Modele.*;
-import com.example.sixquiprend.Vue.Interface.MainController;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -35,7 +35,7 @@ public class MainStage extends StackPane {
     public MainStage() {
         alert.setTitle("Information message");
         alert.setHeaderText(null);
-        alert.setContentText("Welcome to our 6 qui prend\n\n\n" + "Lorlay, Massil, Lorie");
+        alert.setContentText("Welcome to our 6 qui prend\n\n\n" + "Lorlay, Lorie");
         alert.showAndWait();
 
         MainController.askName();
@@ -45,7 +45,7 @@ public class MainStage extends StackPane {
 
         players = new ArrayList<>();
         players.add(new Player("Player 1"));
-        players.add(new Player("Player 2"));
+        players.add(new AI("AI", players));
 
         deck.distribute(players);
 
@@ -136,23 +136,35 @@ public class MainStage extends StackPane {
             FlowPane currentContainer = currentPlayerIndex == 0 ? cardsContainer : cardsContainer2;
 
             if (!currentPlayer.getHand().isEmpty()) {
-                for (int i = 0; i < currentContainer.getChildren().size(); i++) {
-                    ImageView imageView = (ImageView) currentContainer.getChildren().get(i);
-                    Cards card = currentPlayer.getHand().get(i);
+                if (currentPlayer instanceof AI) {
+                    AI aiPlayer = (AI) currentPlayer;
+                    Cards selectedCard = aiPlayer.playRandomCard();
+                    cardsToPlace.add(selectedCard);
+                    currentPlayerIndex++;
+                    nextPlayerChooseCard();
+                } else {
+                    for (int i = 0; i < currentContainer.getChildren().size(); i++) {
+                        ImageView imageView = (ImageView) currentContainer.getChildren().get(i);
+                        Cards card = currentPlayer.getHand().get(i);
 
-                    imageView.setOnMouseClicked(event -> {
-                        try {
-                            int cardValue = card.getValue();
-                            System.out.println("Value of clicked card: " + cardValue);
-                            currentContainer.getChildren().remove(imageView);
-                            currentPlayer.getHand().remove(card);
-                            cardsToPlace.add(card);
-                            currentPlayerIndex++; // Passer au joueur suivant
-                            nextPlayerChooseCard(); // Appeler récursivement pour le joueur suivant
-                        } catch (Exception exception) {
-                            // Gérer les exceptions ici
-                        }
-                    });
+                        imageView.setOnMouseClicked(event -> {
+                            if (event.getButton() == MouseButton.PRIMARY) {
+                                if (imageView.getTranslateY() == 0) {
+                                    double currentTranslateY = imageView.getTranslateY();
+                                    double newTranslateY = currentTranslateY - 30;
+                                    imageView.setTranslateY(newTranslateY);
+                                } else {
+                                    int cardValue = card.getValue();
+                                    System.out.println("Valeur de la carte cliquée : " + cardValue);
+                                    currentContainer.getChildren().remove(imageView);
+                                    currentPlayer.getHand().remove(card);
+                                    cardsToPlace.add(card);
+                                    currentPlayerIndex++;
+                                    nextPlayerChooseCard();
+                                }
+                            }
+                        });
+                    }
                 }
             } else {
                 currentPlayerIndex++; // Passer au joueur suivant
@@ -167,7 +179,7 @@ public class MainStage extends StackPane {
                 System.out.println("All players have chosen a card.");
                 System.out.println("Cards to place: " + cardsToPlace);
                 placeCards(gridPane);
-                // Tous les joueurs ont choisi une carte
+                cardsToPlace.clear();
 
             } else {
                 System.out.println("Not all players have chosen a card yet.");
@@ -175,36 +187,44 @@ public class MainStage extends StackPane {
         }
     }
 
+
+
+
     private void placeCards(GridPane gridPane) {
         int numRows = 4;
+        int numColumns = 5;
         int currentCol = 0;
+        int currentRow = 0;
 
         for (Cards cardsToPlace : cardsToPlace) {
+            int bestRow = -1;
             int bestCol = -1;
             int differenceMin = Integer.MAX_VALUE;
+            List<Cards> middleCards = new ArrayList<>(drawnCards);
 
             for (int row = 0; row < numRows; row++) {
-                Cards middleCards = drawnCards.get(row);
-
-                if (cardsToPlace.getValue() > middleCards.getValue()) {
-                    for (int col = currentCol; col < gridPane.getColumnConstraints().size(); col++) {
-                        boolean colonneVide = true;
+                if (cardsToPlace.getValue() > middleCards.get(row).getValue()) {
+                    for (int col = 0; col < numColumns; col++) {
+                        boolean positionEmpty = true;
 
                         for (Node node : gridPane.getChildren()) {
-                            Integer nodeColonne = GridPane.getColumnIndex(node);
-                            Integer nodeLigne = GridPane.getRowIndex(node);
+                            if (node instanceof ImageView) {
+                                Integer nodeCol = GridPane.getColumnIndex(node);
+                                Integer nodeRow = GridPane.getRowIndex(node);
 
-                            if (nodeColonne != null && nodeLigne != null && nodeColonne == col && nodeLigne == row) {
-                                colonneVide = false;
-                                break;
+                                if (nodeCol != null && nodeRow != null && nodeCol == col && nodeRow == row) {
+                                    positionEmpty = false;
+                                    break;
+                                }
                             }
                         }
 
-                        if (colonneVide) {
-                            int difference = cardsToPlace.getValue() - middleCards.getValue();
+                        if (positionEmpty) {
+                            int difference = cardsToPlace.getValue() - middleCards.get(row).getValue();
 
                             if (difference < differenceMin) {
                                 differenceMin = difference;
+                                bestRow = row;
                                 bestCol = col;
                             }
                         }
@@ -212,25 +232,31 @@ public class MainStage extends StackPane {
                 }
             }
 
-            // Si aucune colonne cible n'a été trouvée, placer la carte dans la colonne courante
-            if (bestCol == -1) {
+            if (bestRow == -1 || bestCol == -1) {
+                bestRow = currentRow;
                 bestCol = currentCol;
             }
 
+            middleCards.set(bestRow, cardsToPlace);
+            System.out.println(middleCards);
+
             Image imageCardsToPlace = new Image(cardsToPlace.getLink());
-            Image nouvelleImageCarteAPlacer = MainController.cropImage(imageCardsToPlace, 180, 180);
-            ImageView imageViewCardsToPlace = new ImageView(nouvelleImageCarteAPlacer);
+            Image newImageCardToPlace = MainController.cropImage(imageCardsToPlace, 180, 180);
+            ImageView imageViewCardsToPlace = new ImageView(newImageCardToPlace);
             imageViewCardsToPlace.setFitWidth(90);
             imageViewCardsToPlace.setFitHeight(140);
 
-            gridPane.add(imageViewCardsToPlace, bestCol + 1, numRows - 1);
+            gridPane.add(imageViewCardsToPlace, bestCol, bestRow);
 
-            // Mettre à jour la colonne courante pour la prochaine carte
             currentCol = bestCol + 1;
+            currentRow = bestRow;
+
+            drawnCards = new ArrayList<>(middleCards);
         }
 
         checkColumns(gridPane);
     }
+
 
     //verifie quand une colonne est pleine
     private void checkColumns(GridPane gridPane) {
@@ -318,6 +344,7 @@ public class MainStage extends StackPane {
 
         return null;
     }
+
 
     private class Pile {
         private List<Cards> cards;
