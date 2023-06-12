@@ -31,6 +31,7 @@ public class MainStage extends StackPane {
     private List<Cards> cardsToPlace;
     private GridPane gridPane;
     private List<Pile> piles = new ArrayList<>();
+    private int currentPileIndex = 0;
 
     public MainStage() {
         alert.setTitle("Information message");
@@ -280,7 +281,7 @@ public class MainStage extends StackPane {
             }
         }
     }
-// recherche une carte spécifique dans un GridPane en utilisant ses coordonnées de ligne et de colonne.
+    // recherche une carte spécifique dans un GridPane en utilisant ses coordonnées de ligne et de colonne.
     private Node getNodeByRowColumnIndex(final int row, final int column, GridPane gridPane) {
         Node result = null;
 
@@ -298,28 +299,36 @@ public class MainStage extends StackPane {
 
         return result;
     }
-//quand colonne pleine on collecte les cartes
+    //quand colonne pleine on collecte les cartes
     private void collectCards(int column, GridPane gridPane) {
         ObservableList<Node> children = gridPane.getChildren();
+        List<Cards> collectedCards = new ArrayList<>();
 
         for (int row = 0; row < gridPane.getRowConstraints().size() - 1; row++) {
             Node node = getNodeByRowColumnIndex(row, column, gridPane);
 
             if (node != null) {
+                Cards card = findCardByImage(node);
+                if (card != null) {
+                    collectedCards.add(card);
+                }
                 gridPane.getChildren().remove(node);
             }
         }
 
+        if (!collectedCards.isEmpty()) {
+            addToCardPile(collectedCards);
+        }
 
         System.out.println("Cards in column " + column + " have been collected.");
     }
-
-    private void collectCardsToPile(List<Cards> collectedCards) {
-        Pile pile = new Pile(collectedCards);
-        piles.add(pile);
-
-        System.out.println("Cards collected: " + collectedCards);
+    private void addToCardPile(List<Cards> cards) {
+        Pile currentPile = piles.get(currentPileIndex);
+        currentPile.addCards(cards);
     }
+
+
+
 
     // identifier  cartes sélectionnées par  joueurs  et pour obtenir l'URL de l'image associée donc pour getNodeByRowColumnIndex
     private Cards findCardByImage(Node node) {
@@ -355,6 +364,10 @@ public class MainStage extends StackPane {
 
         public List<Cards> getCards() {
             return cards;
+        }
+
+        public void addCards(List<Cards> cards) {
+            this.cards.addAll(cards);
         }
     }
 

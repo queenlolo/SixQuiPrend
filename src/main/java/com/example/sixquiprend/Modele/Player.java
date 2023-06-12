@@ -12,6 +12,7 @@ public class Player {
     private int nbBeefs;
     private int score;
     private List<Cards> hand;
+    private List<Cards> cardPile;
 
     public Player(String name) {
         this.name = name;
@@ -19,6 +20,7 @@ public class Player {
         this.nbBeefs = 0;
         this.score = 0;
         this.hand = new ArrayList<>();
+        cardPile = new ArrayList<>();
     }
 
     public String getName() {
@@ -91,4 +93,7 @@ public class Player {
         return score;
     }
 
+    public void addToCardPile(List<Cards> cards) {
+        cardPile.addAll(cards);
+    }
 }

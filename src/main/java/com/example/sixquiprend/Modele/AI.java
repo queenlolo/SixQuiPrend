@@ -1,5 +1,9 @@
 package com.example.sixquiprend.Modele;
 
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
+
 import java.util.List;
 import java.util.Random;
 
@@ -27,4 +31,8 @@ public class AI extends Player {
 
         return cardToPlace;
     }
+
+    public void play(GridPane gridPane) {
+    }
+
 }

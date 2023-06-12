@@ -93,4 +93,10 @@ public class Cards {
     public void afficher() {
         System.out.println("Link: " + this.link + ", Value: " + this.value);
     }
+
+    public int getScore() {
+        return 0;
+    }
+
+
 }
